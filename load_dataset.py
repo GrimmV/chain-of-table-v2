@@ -1,6 +1,6 @@
 import json
 
-def load_tabfact_dataset(
+def load_dataset(
     dataset_path,
     first_n=-1,
 ):

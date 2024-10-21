@@ -6,12 +6,7 @@ def table2df(table_text, num_rows=100):
     df = pd.DataFrame(data=rows, columns=header)
     return df
 
-def table2pipe(
-    table_text,
-    num_rows=100,
-    caption=None,
-):
-    df = table2df(table_text, num_rows)
+def df2pipe(df, caption=None):
     linear_table = ""
     if caption is not None:
         linear_table += "table caption : " + caption + "\n"
@@ -25,6 +20,15 @@ def table2pipe(
         if row_idx != len(rows) - 1:
             line += "\n"
         linear_table += line
+    return linear_table
+
+def table2pipe(
+    table_text,
+    num_rows=100,
+    caption=None,
+):
+    df = table2df(table_text, num_rows)
+    linear_table = df2pipe(df, caption)
     return linear_table
 
 def pipe2table(pipe: str):
