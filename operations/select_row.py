@@ -1,16 +1,38 @@
 import pandas as pd
+from pydantic import BaseModel
+from prompts.select_row_params_prompt import select_row_params_prompt
 
-def select_row(df: pd.DataFrame, rows: list[str]) -> pd.DataFrame:
-    
-    numeric_rows = _extract_row_numbers(rows)
-    print(numeric_rows)
-    
-    return df.iloc[numeric_rows]
+class SelectRowParams(BaseModel):
+    column: str
+    operator: str
+    value: int | str | float
 
-
-def _extract_row_numbers(rows: list[str]) -> list[int]:
+def select_row(df: pd.DataFrame, column: str, operator: str, value: int | str | float) -> pd.DataFrame:
     
-    numeric_rows = [int(item.split()[1]) - 1 for item in rows]
-    
-    return numeric_rows
+    if isinstance(value, str):
+        if operator == "==":
+            mask = eval(f"df['{column}'].str.contains({value})")
+        else:
+            mask = eval(f"~df['{column}'].str.contains({value})")
+            
+    else:
+        df[column] = pd.to_numeric(df[column], errors='coerce')
+        mask = eval(f"df['{column}'] {operator} {value}")
         
+    # e.g. df["column1"] > 20
+    
+    return df[mask]
+
+
+def get_select_row_params(query, table, llm):
+    
+    prompt = select_row_params_prompt(query, table)
+    
+    response = llm.generate(
+        prompt,
+        response_model=SelectRowParams,
+        system_message="You are a helpful assistant and expert in transforming tables based on python pandas operations.",
+    )
+
+
+    return response.dict()
