@@ -11,9 +11,9 @@ def select_row(df: pd.DataFrame, column: str, operator: str, value: int | str | 
     
     if isinstance(value, str):
         if operator == "==":
-            mask = eval(f"df['{column}'].str.contains({value})")
+            mask = eval(f"df['{column}'].str.contains('{value}')")
         else:
-            mask = eval(f"~df['{column}'].str.contains({value})")
+            mask = eval(f"~df['{column}'].str.contains('{value}')")
             
     else:
         df[column] = pd.to_numeric(df[column], errors='coerce')

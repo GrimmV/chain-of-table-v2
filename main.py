@@ -23,7 +23,7 @@ llm = ChatGPT(model_name=MODEL_NAME, key=API_KEY)
 def get_final_table(query, table, llm, caption) -> pd.DataFrame:
     next_operation = "START"
     pandas_table = pipe2table(table)
-    available_operations = possible_next_operations
+    available_operations = list(possible_next_operations)
     op_chain = []
     inputs = {
         "llm": llm,
@@ -37,8 +37,10 @@ def get_final_table(query, table, llm, caption) -> pd.DataFrame:
     }
     app = get_workflow()
     for output in app.stream(inputs):
-        print(output)
-    # print(output)
+        pass
+    keys = list(output.keys())
+    print(keys)
+    return {"table": output[keys[0]]["table"], "chain": output[keys[0]]["operation_chain"]}
         
 
 if __name__ == "__main__":
@@ -51,19 +53,21 @@ if __name__ == "__main__":
 
         stringified_table = table2pipe(active_table["table_text"], caption=caption)
         statement = active_table["statement"]
-        final_table = get_final_table(statement, stringified_table, llm, caption)
-    #     # print(df2pipe(final_table, caption))
+        final_table_info = get_final_table(statement, stringified_table, llm, caption)
+        final_table = final_table_info["table"]
+        op_chain = final_table_info["chain"]
+        print(df2pipe(final_table, caption))
         
-    #     final_response = final_evaluation(statement, final_table, llm)
+        final_response = final_evaluation(statement, op_chain, final_table, llm)
         
-    #     print(f"model evaluation: {final_response["istrue"]}")
-    #     print(f"label: {True if label == 1 else False}")
+        print(f"model evaluation: {final_response["istrue"]}")
+        print(f"label: {True if label == 1 else False}")
         
-    #     eval_values.append({"pred": final_response["istrue"], "label": True if label == 1 else False})
+        eval_values.append({"pred": final_response["istrue"], "label": True if label == 1 else False})
     
-    # correct_pairs = 0
-    # for elem in eval_values:
-    #     if elem["pred"] == elem["label"]:
-    #         correct_pairs += 1
+    correct_pairs = 0
+    for elem in eval_values:
+        if elem["pred"] == elem["label"]:
+            correct_pairs += 1
     
-    # print(correct_pairs / num_samples)
+    print(correct_pairs / num_samples)

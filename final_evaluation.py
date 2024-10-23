@@ -4,11 +4,13 @@ from pydantic import BaseModel
 class FinalEval(BaseModel):
     istrue: bool
 
-def final_evaluation(query: str, table: str, llm: ChatGPT):
+def final_evaluation(query: str, op_chain: dict, table: str, llm: ChatGPT):
     
     prompt = "Evaluate the user query based on the given query and tell if the statement is true or false."
     
     prompt += f"statement: {query}\n\n"
+    
+    prompt += f"These operations formed the table below: {op_chain}\n\n"
     
     prompt += f"table: {table}\n\n"
     

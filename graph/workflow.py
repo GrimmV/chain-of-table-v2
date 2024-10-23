@@ -1,4 +1,6 @@
 from langgraph.graph import StateGraph, END
+
+
 from graph.GraphState import GraphState
 from graph.nodes.next_operation import next_operation
 
@@ -12,6 +14,7 @@ from graph.nodes.select_row_params import select_row_params
 from graph.nodes.select_row import select_row
 from graph.nodes.sort_column_params import sort_column_params
 from graph.nodes.sort_column import sort_column
+from graph.nodes.reset_state import reset_state
 
 def decide_cat_path(state):
     operation = state["next_operation"]
@@ -20,12 +23,6 @@ def decide_cat_path(state):
 def decide_end(state):
     operation_chain = state["operation_chain"]
     out = "end" if len(operation_chain) > 3 else "loop"
-    
-    print(operation_chain)
-    print(state["table"])
-    # if out == "end":
-    #     print(operation_chain)
-    #     print(state["table"])
     return out
  
 def get_workflow():
@@ -42,8 +39,10 @@ def get_workflow():
     workflow.add_node("select_column", select_column)
     workflow.add_node("select_row", select_row)
     workflow.add_node("sort_column", sort_column)
+    workflow.add_node("reset_state", reset_state)
 
-    workflow.set_entry_point("get_next_operation")
+    workflow.set_entry_point("reset_state")
+    workflow.add_edge("reset_state", "get_next_operation")
     workflow.add_conditional_edges(
         "get_next_operation",
         decide_cat_path,
@@ -101,5 +100,7 @@ def get_workflow():
             "end": END
         }
     )
+    
+    # workflow.add_edge("reset_state", END)
     
     return workflow.compile()
