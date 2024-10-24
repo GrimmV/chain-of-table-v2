@@ -6,11 +6,9 @@ def select_row(state):
     params = state["next_operation_parameters"]
     operation_chain = state["operation_chain"]
     
-    column = params["column"]
-    operator = params["operator"]
-    value = params["value"]
+    conditions = params
     
-    new_table = selectrow(table, column, operator, value)
+    new_table = selectrow(table, conditions)
     
     state["table"] = new_table
     state["operation_chain"].append({"func": "select_row", "params": params})

@@ -22,7 +22,7 @@ def decide_cat_path(state):
 
 def decide_end(state):
     operation_chain = state["operation_chain"]
-    out = "end" if len(operation_chain) > 3 else "loop"
+    out = "end" if len(operation_chain) > 2 else "loop"
     return out
  
 def get_workflow():

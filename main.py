@@ -39,7 +39,6 @@ def get_final_table(query, table, llm, caption) -> pd.DataFrame:
     for output in app.stream(inputs):
         pass
     keys = list(output.keys())
-    print(keys)
     return {"table": output[keys[0]]["table"], "chain": output[keys[0]]["operation_chain"]}
         
 
@@ -56,9 +55,14 @@ if __name__ == "__main__":
         final_table_info = get_final_table(statement, stringified_table, llm, caption)
         final_table = final_table_info["table"]
         op_chain = final_table_info["chain"]
+        print(f"user query: {statement}")
+        print("function chain:")
+        print([f"{op["func"]}({op["params"] if isinstance(op["params"], list) else list(op["params"].values())}) -> " for op in op_chain])
         print(df2pipe(final_table, caption))
         
         final_response = final_evaluation(statement, op_chain, final_table, llm)
+        
+        print(final_response["explanation"])
         
         print(f"model evaluation: {final_response["istrue"]}")
         print(f"label: {True if label == 1 else False}")

@@ -9,8 +9,9 @@ class SortColumnParams(BaseModel):
 def sort_column(df: pd.DataFrame, column, order: str = "ascending"):
     
     is_ascending = not order != "ascending"
+    print(f"column to sort {column}")
     
-    df = df.sort_values(by=column, ascending=is_ascending)
+    df = df.sort_values(by=[column], ascending=is_ascending)
     
     return df
 

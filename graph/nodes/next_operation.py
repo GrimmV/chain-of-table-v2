@@ -3,8 +3,8 @@ from transform_dataset import df2pipe
 
 def next_operation(state):
     
-    print(state["next_operation"])
-    print(state["table"])
+    # print(state["next_operation"])
+    # print(state["table"])
     
     query = state["query"]
     table = state["table"]

@@ -32,7 +32,7 @@ class ChatGPT:
         self.key = key
         self.client = instructor.from_openai(OpenAI(api_key=key))
 
-    def generate(self, prompt, response_model, options=None, system_message="I will give you some examples, you need to follow the examples and complete the text, and no other content."):
+    def generate(self, prompt, response_model, system_message="I will give you some examples, you need to follow the examples and complete the text, and no other content."):
         
         messages = [
             {
@@ -45,7 +45,6 @@ class ChatGPT:
             model=self.model_name,
             messages=messages,
             response_model=response_model
-            # **asdict(options)
         )
         
         return gpt_response
