@@ -11,7 +11,7 @@ def select_row_params_prompt(query, table):
 
     Expected Output:
 
-    Column: age
+    Column: agew
     Operator: >
     Value: 30
 
@@ -24,6 +24,8 @@ def select_row_params_prompt(query, table):
     Operator: ==
     Value: 'active'
 
+    You are only allowed to use the following operators for number-values: '>=', '<=', '>', '<', '==', '!='
+    You are only allowed to use the following operators for string-values: 'contains'
     
     User Query: \n{query}\n
     Output:

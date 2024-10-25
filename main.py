@@ -5,6 +5,7 @@ import pandas as pd
 from utils.next_operations import possible_next_operations
 
 from llm.llm import ChatGPT
+from utils.chain_to_nl import chain_to_nl
 
 from graph.workflow import get_workflow
 
@@ -57,10 +58,11 @@ if __name__ == "__main__":
         op_chain = final_table_info["chain"]
         print(f"user query: {statement}")
         print("function chain:")
-        print([f"{op["func"]}({op["params"] if isinstance(op["params"], list) else list(op["params"].values())}) -> " for op in op_chain])
+        op_chain_nl = chain_to_nl(op_chain)
+        print(op_chain_nl)
         print(df2pipe(final_table, caption))
         
-        final_response = final_evaluation(statement, op_chain, final_table, llm)
+        final_response = final_evaluation(statement, op_chain_nl, final_table, llm)
         
         print(final_response["explanation"])
         
