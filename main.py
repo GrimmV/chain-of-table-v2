@@ -44,7 +44,7 @@ def get_final_table(query, table, llm, caption) -> pd.DataFrame:
         
 
 if __name__ == "__main__":
-    num_samples = 10
+    num_samples = 1
     eval_values = []
     for idx in range(num_samples):
         active_table = dataset[idx]
@@ -66,7 +66,7 @@ if __name__ == "__main__":
         
         print(final_response["explanation"])
         
-        print(f"model evaluation: {final_response["istrue"]}")
+        print(f"model evaluation: {final_response['istrue']}")
         print(f"label: {True if label == 1 else False}")
         
         eval_values.append({"pred": final_response["istrue"], "label": True if label == 1 else False})

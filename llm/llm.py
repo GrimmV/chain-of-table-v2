@@ -18,6 +18,7 @@ import time
 import numpy as np
 from dataclasses import dataclass, asdict
 
+
 @dataclass
 class LLMOptions:
     temperature: float = 0.0
@@ -32,8 +33,15 @@ class ChatGPT:
         self.key = key
         self.client = instructor.from_openai(OpenAI(api_key=key))
 
-    def generate(self, prompt: str, response_model, max_retries: int=3, system_message: str="I will give you some examples, you need to follow the examples and complete the text, and no other content."):
-        
+    def generate(
+        self,
+        prompt: str,
+        response_model,
+        max_retries: int = 3,
+        validation_context: dict=None,
+        system_message: str = "I will give you some examples, you need to follow the examples and complete the text, and no other content.",
+    ):
+
         messages = [
             {
                 "role": "system",
@@ -45,7 +53,8 @@ class ChatGPT:
             model=self.model_name,
             messages=messages,
             max_retries=max_retries,
-            response_model=response_model
+            response_model=response_model,
+            validation_context=validation_context,
         )
-        
+
         return gpt_response

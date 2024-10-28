@@ -14,11 +14,12 @@ class SelectRowParams(BaseModel):
     
     @field_validator('operator')
     def check_operator(cls, v, info: ValidationInfo):
+        print(info)
         value = info.data.get('value')
         if isinstance(value, (int, float)) and v not in num_operators:
-            raise ValueError(f"operator must be one of {num_operators} when value is a number")
+            raise ValueError(f"operator must be one of {num_operators} when value is a number but you provided {v}")
         elif isinstance(value, str) and v not in str_operators:
-            raise ValueError(f"operator must be one of {str_operators} when value is a string")
+            raise ValueError(f"operator must be one of {str_operators} when value is a string but you provided {v}")
         return v
 
 def select_row(df: pd.DataFrame, conditions: List[Dict]) -> pd.DataFrame:
@@ -58,6 +59,7 @@ def get_select_row_params(query, table, llm: ChatGPT):
         prompt,
         response_model=List[SelectRowParams],
         system_message="You are a helpful assistant and expert in transforming tables based on python pandas operations.",
+        validation_context={"table": table}
     )
     
     dict_response = []

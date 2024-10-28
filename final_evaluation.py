@@ -15,7 +15,7 @@ def final_evaluation(query: str, op_chain: dict, table: str, llm: ChatGPT):
     
     prompt += f"These operations formed the table below: {op_chain}\n\n"
     
-    prompt += "Here are the statement about the table and the task is to tell whether the statement is True or False."
+    prompt += "Carefully consider the operations performed and the resulting table. Think step by step."
     
     response = llm.generate(prompt, response_model=FinalEval, system_message="You are a helpful assistant that is an expert in table comprehension.")
     
