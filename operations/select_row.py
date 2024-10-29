@@ -12,13 +12,32 @@ class SelectRowParams(BaseModel):
     column: str
     operator: str
     
+    @field_validator('column')
+    def check_column(cls, v, info: ValidationInfo):
+        
+        column = v
+        column_types = info.context["column_types"]
+        columns = column_types.keys()
+        column_is_numeric = column_types[column]["is_numeric"]
+        value = info.data.get('value')
+        if column not in columns:
+            raise ValueError(f"The specified column '{column}' does not exist. Available columns are {columns}")
+        elif isinstance(value, (int, float)) and not column_is_numeric:
+            print(f"the value is a number: {value}")
+            raise ValueError(f"The value of the filter operation must be numeric as the column has dtype string. Currently, it is a string: {value}")
+        elif isinstance(value, str) and column_is_numeric:
+            raise ValueError(f"The value of the filter operation must be a string as the column has a numeric dtype. Currently, it is a number: {value}")
+        
+        return v
+    
     @field_validator('operator')
     def check_operator(cls, v, info: ValidationInfo):
-        print(info)
         value = info.data.get('value')
         if isinstance(value, (int, float)) and v not in num_operators:
             raise ValueError(f"operator must be one of {num_operators} when value is a number but you provided {v}")
         elif isinstance(value, str) and v not in str_operators:
+            if v == "==":
+                return "contains"
             raise ValueError(f"operator must be one of {str_operators} when value is a string but you provided {v}")
         return v
 
@@ -51,7 +70,7 @@ def select_row(df: pd.DataFrame, conditions: List[Dict]) -> pd.DataFrame:
     return df[combined_mask]
 
 
-def get_select_row_params(query, table, llm: ChatGPT):
+def get_select_row_params(query: str, table: str, validation_context: dict, llm: ChatGPT) -> dict:
     
     prompt = select_row_params_prompt(query, table)
     
@@ -59,7 +78,7 @@ def get_select_row_params(query, table, llm: ChatGPT):
         prompt,
         response_model=List[SelectRowParams],
         system_message="You are a helpful assistant and expert in transforming tables based on python pandas operations.",
-        validation_context={"table": table}
+        validation_context=validation_context
     )
     
     dict_response = []

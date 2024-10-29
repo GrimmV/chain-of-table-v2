@@ -36,6 +36,7 @@ def get_final_table(query, table, llm, caption) -> pd.DataFrame:
         "next_operation": next_operation,
         "next_operation_parameters": {}
     }
+    # print(pandas_table.head())
     app = get_workflow()
     for output in app.stream(inputs):
         pass
@@ -44,7 +45,7 @@ def get_final_table(query, table, llm, caption) -> pd.DataFrame:
         
 
 if __name__ == "__main__":
-    num_samples = 1
+    num_samples = 10
     eval_values = []
     for idx in range(num_samples):
         active_table = dataset[idx]

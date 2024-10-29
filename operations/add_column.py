@@ -1,5 +1,5 @@
 import pandas as pd
-from pydantic import BaseModel
+from pydantic import BaseModel, field_validator, ValidationInfo
 from llm.llm import ChatGPT
 from prompts.add_column_params_prompt import add_column_params_prompt
 
@@ -32,7 +32,7 @@ def _get_column_value(
     return value
 
 
-def get_add_column_parameters(table: str, query: str, llm: ChatGPT):
+def get_add_column_parameters(table: str, query: str, validation_context: dict, llm: ChatGPT) -> dict:
 
     prompt = add_column_params_prompt(query, table)
 
@@ -40,6 +40,7 @@ def get_add_column_parameters(table: str, query: str, llm: ChatGPT):
         prompt,
         response_model=AddColumnParams,
         system_message="You are a helpful assistant and expert in transforming tables based on python pandas operations.",
+        validation_context=validation_context
     )
 
     return response.dict()
