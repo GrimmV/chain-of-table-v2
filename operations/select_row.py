@@ -70,9 +70,9 @@ def select_row(df: pd.DataFrame, conditions: List[Dict]) -> pd.DataFrame:
     return df[combined_mask]
 
 
-def get_select_row_params(query: str, table: str, validation_context: dict, llm: ChatGPT) -> dict:
+def get_select_row_params(query: str, table: str, validation_context: dict, llm: ChatGPT, column_descriptions: dict) -> dict:
     
-    prompt = select_row_params_prompt(query, table)
+    prompt = select_row_params_prompt(query, table, column_descriptions)
     
     response = llm.generate(
         prompt,

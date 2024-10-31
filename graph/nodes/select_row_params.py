@@ -8,6 +8,7 @@ def select_row_params(state):
     table = state["table"]
     llm = state["llm"]
     caption = state["caption"]
+    descriptions = state["column_descriptions"]
     
     pipe_table = df2pipe(table, caption)
     columns = table.columns
@@ -18,7 +19,7 @@ def select_row_params(state):
         
     validation_context = {"column_types": column_type_dict}
     
-    response = get_select_row_params(query, pipe_table, validation_context, llm)
+    response = get_select_row_params(query, pipe_table, validation_context, llm, descriptions)
     
     print(response)
     

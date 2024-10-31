@@ -21,7 +21,7 @@ MODEL_NAME = os.getenv("MODEL_NAME")
 dataset = load_dataset("data/tabfact.jsonl")
 llm = ChatGPT(model_name=MODEL_NAME, key=API_KEY)
 
-def get_final_table(query, table, llm, caption) -> pd.DataFrame:
+def get_final_table(query, table, llm, caption: str, column_descriptions: dict) -> pd.DataFrame:
     next_operation = "START"
     pandas_table = pipe2table(table)
     available_operations = list(possible_next_operations)
@@ -30,6 +30,7 @@ def get_final_table(query, table, llm, caption) -> pd.DataFrame:
         "llm": llm,
         "table": pandas_table,
         "caption": caption,
+        "column_descriptions": column_descriptions,
         "query": query,
         "available_operations": available_operations,
         "operation_chain": op_chain,
@@ -45,21 +46,27 @@ def get_final_table(query, table, llm, caption) -> pd.DataFrame:
         
 
 if __name__ == "__main__":
-    num_samples = 10
+    num_samples = 5
     eval_values = []
     for idx in range(num_samples):
         active_table = dataset[idx]
         caption = active_table["table_caption"]
         label = active_table["label"]
-
-        stringified_table = table2pipe(active_table["table_text"], caption=caption)
         statement = active_table["statement"]
-        final_table_info = get_final_table(statement, stringified_table, llm, caption)
+        descriptions = active_table["column_descriptions"]
+        stringified_table = table2pipe(active_table["table_text"], caption=caption)
+        
+        
+        final_table_info = get_final_table(statement, stringified_table, llm, caption, descriptions)
+        
+        
         final_table = final_table_info["table"]
         op_chain = final_table_info["chain"]
+        op_chain_nl = chain_to_nl(op_chain)
+        
+        
         print(f"user query: {statement}")
         print("function chain:")
-        op_chain_nl = chain_to_nl(op_chain)
         print(op_chain_nl)
         print(df2pipe(final_table, caption))
         

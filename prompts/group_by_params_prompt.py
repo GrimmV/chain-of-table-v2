@@ -1,7 +1,10 @@
-def group_by_params_prompt(query, table):
+def group_by_params_prompt(query, table, column_descriptions):
     prompt = f"""You are provided with a table and a user query. Your task is to suggest the most appropriate column to group the data by and a fitting aggregation function based on the user's request.
 
     Table:\n {table}\n
+    
+    Column descriptions: \n{column_descriptions}\n
+    
     User Query: "{query}"
 
     Your goal is to:

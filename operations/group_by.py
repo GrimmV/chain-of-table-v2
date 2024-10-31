@@ -32,9 +32,9 @@ def group_by(df: pd.DataFrame, column, agg_function):
     return result
 
 
-def get_group_by_params(query: str, table: str, validation_context: dict, llm) -> dict:
+def get_group_by_params(query: str, table: str, validation_context: dict, llm, column_descriptions) -> dict:
 
-    prompt = group_by_params_prompt(query, table)
+    prompt = group_by_params_prompt(query, table, column_descriptions)
 
     params = llm.generate(
         prompt,

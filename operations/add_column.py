@@ -32,9 +32,9 @@ def _get_column_value(
     return value
 
 
-def get_add_column_parameters(table: str, query: str, validation_context: dict, llm: ChatGPT) -> dict:
+def get_add_column_parameters(table: str, query: str, validation_context: dict, llm: ChatGPT, column_descriptions: dict) -> dict:
 
-    prompt = add_column_params_prompt(query, table)
+    prompt = add_column_params_prompt(query, table, column_descriptions)
 
     response = llm.generate(
         prompt,

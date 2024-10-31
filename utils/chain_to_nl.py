@@ -10,7 +10,7 @@ def chain_to_nl(chain):
         if func == "select_row":
             text += "Selected rows based on the following conditions:\n"
             for condition in params:
-                text += f"{condition['column']} {condition['operator']} {condition['value']} \n"
+                text += f"{condition['column']} {condition['operator']} {condition['value']}, "
         elif func == "select_column":
             text += f"Selected the following columns: {params['columns']}\n"
         elif func == "add_column":

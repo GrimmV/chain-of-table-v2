@@ -32,9 +32,9 @@ def sort_column(df: pd.DataFrame, column, order: str = "ascending"):
     
     return df
 
-def get_sort_column_params(query: str, table: str, validation_context: dict, llm) -> dict:
+def get_sort_column_params(query: str, table: str, validation_context: dict, llm, column_descriptions: dict) -> dict:
         
-    prompt = sort_column_params_prompt(query, table)
+    prompt = sort_column_params_prompt(query, table, column_descriptions)
     
     response = llm.generate(
         prompt,

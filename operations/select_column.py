@@ -20,9 +20,9 @@ def select_column(df: pd.DataFrame, columns: list[str]):
     
     return df[columns]
 
-def get_select_column_params(query: str, table: str, validation_context: dict, llm) -> dict:
+def get_select_column_params(query: str, table: str, validation_context: dict, llm, column_descriptions) -> dict:
     
-    prompt = select_columns_params_prompt(query, table)
+    prompt = select_columns_params_prompt(query, table, column_descriptions)
     
     response = llm.generate(
         prompt,

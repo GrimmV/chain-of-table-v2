@@ -1,8 +1,10 @@
-def select_row_params_prompt(query, table):
+def select_row_params_prompt(query, table, column_descriptions):
     prompt = f"""You are given a table and a user query. Based on the user's query, 
     provide a list of filter conditions that include the column name, operator, and value to compare.
 
     Table: \n{table}\n
+    
+    Column descriptions: \n{column_descriptions}\n
 
     User Query: {query}
     
