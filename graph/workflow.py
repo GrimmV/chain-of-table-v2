@@ -21,6 +21,7 @@ max_operations = 3
 
 def decide_cat_path(state):
     operation = state["next_operation"]
+    table = state["table"]
     return operation
 
 
@@ -47,7 +48,7 @@ def get_workflow():
     workflow.add_node("group_by_params", group_by_params)
     workflow.add_node("select_column_params", select_column_params)
     workflow.add_node("select_row_params", select_row_params)
-    workflow.add_node("validate_row_params", evaluate_select_row_params)
+    # workflow.add_node("validate_row_params", evaluate_select_row_params)
     workflow.add_node("sort_column_params", sort_column_params)
     workflow.add_node("add_column", add_column)
     workflow.add_node("group_by", group_by)
@@ -70,8 +71,8 @@ def get_workflow():
             "None": END,
         },
     )
-    workflow.add_edge("select_row_params", "validate_row_params")
-    workflow.add_edge("validate_row_params", "select_row")
+    workflow.add_edge("select_row_params", "select_row")
+    # workflow.add_edge("validate_row_params", "select_row")
     workflow.add_edge("add_column_params", "add_column")
     workflow.add_edge("select_column_params", "select_column")
     workflow.add_edge("group_by_params", "group_by")

@@ -1,10 +1,11 @@
-from transform_dataset import table2pipe, pipe2table, df2pipe
+from transform_dataset import table2pipe, pipe2table, df2pipe, table2df
 from load_dataset import load_dataset
 from final_evaluation import final_evaluation
 import pandas as pd
 from utils.next_operations import possible_next_operations
 
 from llm.llm import ChatGPT
+from llm.ollama import OllamaOpenAI
 from utils.chain_to_nl import chain_to_nl
 
 from graph.workflow import get_workflow
@@ -17,18 +18,23 @@ load_dotenv()
 
 API_KEY = os.getenv('API_KEY')
 MODEL_NAME = os.getenv("MODEL_NAME")
+BASE_URL = os.getenv("BASE_URL")
 
-dataset = load_dataset("data/tabfact.jsonl")
-llm = ChatGPT(model_name=MODEL_NAME, key=API_KEY)
+model = "gpt"
+dataset = load_dataset("data/data.jsonl")
+if model == "nemo":
+    llm = OllamaOpenAI(model_name=MODEL_NAME, base_url=BASE_URL)
+else:
+    llm = ChatGPT(model_name=MODEL_NAME, key=API_KEY)
+    
 
-def get_final_table(query, table, llm, caption: str, column_descriptions: dict) -> pd.DataFrame:
+def get_final_table(query, table: pd.DataFrame, llm, caption: str, column_descriptions: dict) -> pd.DataFrame:
     next_operation = "START"
-    pandas_table = pipe2table(table)
     available_operations = list(possible_next_operations.keys())
     op_chain = []
     inputs = {
         "llm": llm,
-        "table": pandas_table,
+        "table": table,
         "caption": caption,
         "initial_column_descriptions": column_descriptions,
         "column_descriptions": column_descriptions,
@@ -38,29 +44,28 @@ def get_final_table(query, table, llm, caption: str, column_descriptions: dict) 
         "next_operation": next_operation,
         "next_operation_parameters": {}
     }
-    # print(pandas_table.head())
     app = get_workflow()
     for output in app.stream(inputs):
         keys = list(output.keys())
-        table = output[keys[0]]["table"]
-        print(table)
+        print_table = output[keys[0]]["table"]
     keys = list(output.keys())
     return {"table": output[keys[0]]["table"], "chain": output[keys[0]]["operation_chain"]}
         
 
 if __name__ == "__main__":
-    num_samples = 1
+    num_samples = 7
     eval_values = []
     for idx in range(num_samples):
         active_table = dataset[idx]
         caption = active_table["table_caption"]
         label = active_table["label"]
         statement = active_table["statement"]
+        table_text = active_table["table_text"]
         descriptions = active_table["column_descriptions"]
-        stringified_table = table2pipe(active_table["table_text"], caption=caption)
+        pandas_table = table2df(table_text)
         
         
-        final_table_info = get_final_table(statement, stringified_table, llm, caption, descriptions)
+        final_table_info = get_final_table(statement, pandas_table, llm, caption, descriptions)
         
         
         final_table = final_table_info["table"]

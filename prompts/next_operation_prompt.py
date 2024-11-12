@@ -38,6 +38,8 @@ def _get_operation_descriptions(available_operations: list[str], all_operations:
     described_operations = {}
     
     for op in available_operations:
-        described_operations[op] = all_operations[op]["description"]
+        condition = all_operations[op].get("condition")
+        if condition not in available_operations:
+            described_operations[op] = all_operations[op]["description"]
         
     return described_operations

@@ -11,6 +11,7 @@ class SelectRowParams(BaseModel):
     value: int | str | float
     column: str
     operator: str
+    explanation: str
     
     @field_validator('column')
     def check_column(cls, v, info: ValidationInfo):
@@ -18,10 +19,10 @@ class SelectRowParams(BaseModel):
         column = v
         column_types = info.context["column_types"]
         columns = column_types.keys()
-        column_is_numeric = column_types[column]["is_numeric"]
-        value = info.data.get('value')
         if column not in columns:
             raise ValueError(f"The specified column '{column}' does not exist. Available columns are {columns}")
+        column_is_numeric = column_types[column]["is_numeric"]
+        value = info.data.get('value')
         # elif isinstance(value, (int, float)) and not column_is_numeric:
         #     print(f"the value is a number: {value}")
         #     raise ValueError(f"The value of the filter operation must be numeric as the column '{column}' has dtype string. Currently, it is a string: {value}")
@@ -50,8 +51,6 @@ def select_row(df: pd.DataFrame, conditions: List[Dict]) -> pd.DataFrame:
         column = condition["column"]
         operator = condition["operator"]
         value = condition["value"]
-
-        print(condition)
     
         if isinstance(value, str):
             if operator == "contains":
@@ -60,15 +59,13 @@ def select_row(df: pd.DataFrame, conditions: List[Dict]) -> pd.DataFrame:
         else:
             df[column] = pd.to_numeric(df[column], errors='coerce')
             mask = eval(f"df['{column}'] {operator} {value}")
-        
+            
         masks.append(mask)
     
     combined_mask = masks[0]
     if len(masks) > 1:
         for mask in masks[1:]:
             combined_mask &= mask
-    
-    print(combined_mask)
     
     return df[combined_mask]
 
@@ -83,6 +80,9 @@ def get_select_row_params(query: str, table: str, validation_context: Dict, llm:
         system_message="You are a helpful assistant and expert in transforming tables based on python pandas operations.",
         validation_context=validation_context
     )
+    
+    print(response)
+    
     
     dict_response = []
     for elem in response:

@@ -1,6 +1,6 @@
 def select_row_params_prompt(query, table, column_descriptions):
     prompt = f"""You are given a table and a user query. Based on the user's query, 
-    provide a list of filter conditions that include the column name, operator, and value to compare.
+    provide filter conditions that include the column name, operator, and value to compare.
 
     Snippet of the table: \n{table}\n
     
@@ -29,7 +29,9 @@ def select_row_params_prompt(query, table, column_descriptions):
     You are only allowed to use the following operators for number-values: '>=', '<=', '>', '<', '==', '!='
     You are only allowed to use the following operators for string-values: 'contains'
     
-    Make sure that the filter condition is valid and respects the values and spelling from the column of the given table. Think step by step.
+    Make sure that the filter condition is valid and respects the values and spelling from the column of the given table.
+    Only filter for numbers if it is explicitely necessary.
+    
     Output:
     """
     

@@ -7,7 +7,8 @@ possible_next_operations = {
         #         "description": "Filter the first n rows from the table."      
         # },
         "add_column": {
-                "description": "Add a custom column to the table to improve verbosity."
+                "description": "Add a custom column to the table to improve verbosity.",
+                "condition": "select_row"
         }, 
         "select_column": {
                 "description": "Choose a subset of columns."

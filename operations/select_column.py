@@ -10,8 +10,6 @@ class SelectColumnsParams(BaseModel):
     def check_columns(cls, v, info: ValidationInfo):
         columns = info.context["columns"]
         filter_columns = set(v)
-        # print(filter_columns)
-        # print(set(columns))
         if not filter_columns.issubset(set(columns)):
             raise ValueError(f"Not all specified columns exist: {v}. Available columns are {columns}")
         return v
