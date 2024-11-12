@@ -1,7 +1,8 @@
 from operations.group_by import get_group_by_params
 from transform_dataset import df2pipe
+from graph.GraphState import GraphState
 
-def group_by_params(state):
+def group_by_params(state: GraphState) -> GraphState:
     
     query = state["query"]
     table = state["table"]

@@ -1,6 +1,7 @@
 from operations.sort_column import sort_column as sortcolumn
+from graph.GraphState import GraphState
 
-def sort_column(state):
+def sort_column(state: GraphState) -> GraphState:
     
     table = state["table"]
     params = state["next_operation_parameters"]

@@ -1,7 +1,8 @@
 from operations.sort_column import get_sort_column_params
 from transform_dataset import df2pipe
+from graph.GraphState import GraphState
 
-def sort_column_params(state):
+def sort_column_params(state: GraphState) -> GraphState:
 
     query = state["query"]
     table = state["table"]

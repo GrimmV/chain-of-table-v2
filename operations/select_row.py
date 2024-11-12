@@ -22,11 +22,11 @@ class SelectRowParams(BaseModel):
         value = info.data.get('value')
         if column not in columns:
             raise ValueError(f"The specified column '{column}' does not exist. Available columns are {columns}")
-        elif isinstance(value, (int, float)) and not column_is_numeric:
-            print(f"the value is a number: {value}")
-            raise ValueError(f"The value of the filter operation must be numeric as the column has dtype string. Currently, it is a string: {value}")
-        elif isinstance(value, str) and column_is_numeric:
-            raise ValueError(f"The value of the filter operation must be a string as the column has a numeric dtype. Currently, it is a number: {value}")
+        # elif isinstance(value, (int, float)) and not column_is_numeric:
+        #     print(f"the value is a number: {value}")
+        #     raise ValueError(f"The value of the filter operation must be numeric as the column '{column}' has dtype string. Currently, it is a string: {value}")
+        # elif isinstance(value, str) and column_is_numeric:
+        #     raise ValueError(f"The value of the filter operation must be a string as the column '{column}' has a numeric dtype. Currently, it is a number: {value}")
         
         return v
     
@@ -50,7 +50,8 @@ def select_row(df: pd.DataFrame, conditions: List[Dict]) -> pd.DataFrame:
         column = condition["column"]
         operator = condition["operator"]
         value = condition["value"]
-    
+
+        print(condition)
     
         if isinstance(value, str):
             if operator == "contains":
@@ -67,10 +68,12 @@ def select_row(df: pd.DataFrame, conditions: List[Dict]) -> pd.DataFrame:
         for mask in masks[1:]:
             combined_mask &= mask
     
+    print(combined_mask)
+    
     return df[combined_mask]
 
 
-def get_select_row_params(query: str, table: str, validation_context: dict, llm: ChatGPT, column_descriptions: dict) -> dict:
+def get_select_row_params(query: str, table: str, validation_context: Dict, llm: ChatGPT, column_descriptions: Dict) -> List[Dict]:
     
     prompt = select_row_params_prompt(query, table, column_descriptions)
     

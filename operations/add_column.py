@@ -6,6 +6,7 @@ from prompts.add_column_params_prompt import add_column_params_prompt
 
 class AddColumnParams(BaseModel):
     name: str
+    description: str
 
 
 class ColumnValue(BaseModel):

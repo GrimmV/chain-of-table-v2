@@ -7,7 +7,7 @@ class FinalEval(BaseModel):
 
 def final_evaluation(query: str, op_chain: dict, table: str, llm: ChatGPT):
     
-    prompt = "Evaluate the user query based on the given query and tell if the statement is true or false."
+    prompt = "Evaluate the user query based on the given table and tell if the users statement is true or false."
     
     prompt += f"statement: {query}\n\n"
     

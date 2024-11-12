@@ -1,7 +1,8 @@
 from get_next_operation import get_next_operation
 from transform_dataset import df2pipe
+from graph.GraphState import GraphState
 
-def next_operation(state):
+def next_operation(state: GraphState) -> GraphState:
     
     # print(state["next_operation"])
     # print(state["table"])

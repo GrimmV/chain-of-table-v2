@@ -28,7 +28,7 @@ class GroupByParams(BaseModel):
         return v
 
 def group_by(df: pd.DataFrame, column, agg_function):
-    result = df.groupby(by=[column]).agg(getattr(pd.core.groupby.DataFrameGroupBy, agg_function)())
+    result = df.groupby(by=[column]).agg(agg_function).reset_index()
     return result
 
 

@@ -1,7 +1,8 @@
 from operations.select_column import get_select_column_params
 from transform_dataset import df2pipe
+from graph.GraphState import GraphState
 
-def select_column_params(state):
+def select_column_params(state: GraphState) -> GraphState:
     
     query = state["query"]
     table = state["table"]

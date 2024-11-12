@@ -1,6 +1,7 @@
 from operations.select_column import select_column as selectcolumn
+from graph.GraphState import GraphState
 
-def select_column(state):
+def select_column(state: GraphState) -> GraphState:
     
     table = state["table"]
     params = state["next_operation_parameters"]

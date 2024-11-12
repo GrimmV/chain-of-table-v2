@@ -10,8 +10,9 @@ class GraphState(TypedDict):
     table: pd.DataFrame
     query: str
     caption: str
+    initial_column_descriptions: dict
     column_descriptions: dict
     available_operations: list[str]
     operation_chain: list[str]
     next_operation: str
-    next_operation_parameters: list[str]
+    next_operation_parameters: list[dict] | dict

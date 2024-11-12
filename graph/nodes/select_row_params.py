@@ -1,8 +1,9 @@
 from operations.select_row import get_select_row_params
 from transform_dataset import df2pipe
 from utils.check_numeric_column import check_numeric_column
+from graph.GraphState import GraphState
 
-def select_row_params(state):
+def select_row_params(state: GraphState) -> GraphState:
     
     query = state["query"]
     table = state["table"]
@@ -20,8 +21,6 @@ def select_row_params(state):
     validation_context = {"column_types": column_type_dict}
     
     response = get_select_row_params(query, pipe_table, validation_context, llm, descriptions)
-    
-    print(response)
     
     state["next_operation_parameters"] = response
     

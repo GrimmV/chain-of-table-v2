@@ -1,6 +1,7 @@
 from operations.group_by import group_by as groupby
+from graph.GraphState import GraphState
 
-def group_by(state):
+def group_by(state: GraphState) -> GraphState:
     
     table = state["table"]
     params = state["next_operation_parameters"]
@@ -8,6 +9,8 @@ def group_by(state):
     
     column = params["column"]
     agg_function = params["agg_function"]
+    
+    print(table.head())
     
     new_table = groupby(table, column=column, agg_function=agg_function)
     

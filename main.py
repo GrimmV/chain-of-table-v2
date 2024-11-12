@@ -30,6 +30,7 @@ def get_final_table(query, table, llm, caption: str, column_descriptions: dict) 
         "llm": llm,
         "table": pandas_table,
         "caption": caption,
+        "initial_column_descriptions": column_descriptions,
         "column_descriptions": column_descriptions,
         "query": query,
         "available_operations": available_operations,
@@ -40,13 +41,15 @@ def get_final_table(query, table, llm, caption: str, column_descriptions: dict) 
     # print(pandas_table.head())
     app = get_workflow()
     for output in app.stream(inputs):
-        pass
+        keys = list(output.keys())
+        table = output[keys[0]]["table"]
+        print(table)
     keys = list(output.keys())
     return {"table": output[keys[0]]["table"], "chain": output[keys[0]]["operation_chain"]}
         
 
 if __name__ == "__main__":
-    num_samples = 5
+    num_samples = 1
     eval_values = []
     for idx in range(num_samples):
         active_table = dataset[idx]

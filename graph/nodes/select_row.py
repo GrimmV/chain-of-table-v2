@@ -1,6 +1,7 @@
 from operations.select_row import select_row as selectrow
+from graph.GraphState import GraphState
 
-def select_row(state):
+def select_row(state: GraphState) -> GraphState:
     
     table = state["table"]
     params = state["next_operation_parameters"]

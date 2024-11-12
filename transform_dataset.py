@@ -6,7 +6,7 @@ def table2df(table_text, num_rows=100):
     df = pd.DataFrame(data=rows, columns=header)
     return df
 
-def df2pipe(df, caption=None):
+def df2pipe(df, caption=None, size: int = 5):
     linear_table = ""
     if caption is not None:
         linear_table += "table caption : " + caption + "\n"
@@ -15,6 +15,7 @@ def df2pipe(df, caption=None):
     linear_table += header
     rows = df.values.tolist()
     for row_idx, row in enumerate(rows):
+        if row_idx >= size: break
         row = [str(x) for x in row]
         line = "row {} : ".format(row_idx + 1) + " | ".join(row)
         if row_idx != len(rows) - 1:

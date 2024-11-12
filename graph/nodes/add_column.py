@@ -1,6 +1,7 @@
 from operations.add_column import add_column as add_col
+from graph.GraphState import GraphState
 
-def add_column(state):
+def add_column(state: GraphState) -> GraphState:
     
     table = state["table"]
     params = state["next_operation_parameters"]

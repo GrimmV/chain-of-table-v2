@@ -17,6 +17,7 @@ from openai import OpenAI
 import time
 import numpy as np
 from dataclasses import dataclass, asdict
+from llm.logger import log_kwargs, log_exception
 
 
 @dataclass
@@ -32,6 +33,8 @@ class ChatGPT:
         self.model_name = model_name
         self.key = key
         self.client = instructor.from_openai(OpenAI(api_key=key))
+        self.client.on("completion:kwargs", log_kwargs)
+        self.client.on("completion:error", log_exception)
 
     def generate(
         self,
@@ -39,7 +42,7 @@ class ChatGPT:
         response_model,
         max_retries: int = 3,
         validation_context: dict=None,
-        system_message: str = "I will give you some examples, you need to follow the examples and complete the text, and no other content.",
+        system_message: str = "You are a helpful assistant.",
     ):
 
         messages = [
