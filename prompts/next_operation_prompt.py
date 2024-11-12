@@ -1,4 +1,7 @@
+from utils.next_operations import possible_next_operations
+
 def next_operation_prompt(operations: list[str], table: str, query: str) -> str:
+    described_operations = _get_operation_descriptions(operations, possible_next_operations)
     prompt = f"""Context: You are provided with a snippet table and a query that requires insights based on the data. Your task is to suggest operations that will extract the relevant informations from the full table.
 
     This is the users query: {query}
@@ -11,7 +14,7 @@ def next_operation_prompt(operations: list[str], table: str, query: str) -> str:
         Review the Table: Start by carefully reviewing the provided table and query.
         Choose an Operation: Identify one operation you believe should be performed next. 
         
-        The available operations are: {operations} and None
+        The available operations are: {described_operations} and None
         
         Explain why this operation is necessary.
 
@@ -28,3 +31,13 @@ def next_operation_prompt(operations: list[str], table: str, query: str) -> str:
 
     """
     return prompt
+
+
+def _get_operation_descriptions(available_operations: list[str], all_operations: dict) -> dict:
+    
+    described_operations = {}
+    
+    for op in available_operations:
+        described_operations[op] = all_operations[op]["description"]
+        
+    return described_operations

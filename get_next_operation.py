@@ -14,9 +14,9 @@ class NextOperation(BaseModel):
     @field_validator("next_operation")
     @classmethod
     def operation_must_contain(cls, v: str) -> str:
-        if v not in list(possible_next_operations) and v != "None":
+        if v not in list(possible_next_operations.keys()) and v != "None":
             raise ValueError(
-                f"next operation must be one of {str(possible_next_operations)} or None but it is {v}"
+                f"next operation must be one of {str(possible_next_operations.keys())} or None but it is {v}"
             )
         return v
 
@@ -25,7 +25,7 @@ def get_next_operation(
     query: str,
     table_content: str,
     llm: ChatGPT = None,
-    next_operations: list[str] = list(possible_next_operations)
+    next_operations: list[str] = list(possible_next_operations.keys())
 ) -> dict:
 
     prompt = next_operation_prompt(next_operations, query, table_content)

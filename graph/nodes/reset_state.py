@@ -3,7 +3,7 @@ from graph.GraphState import GraphState
 
 def reset_state(state: GraphState) -> GraphState:
     
-    state["available_operations"] = list(possible_next_operations)
+    state["available_operations"] = list(possible_next_operations.keys())
     state["operation_chain"] = []
     state["next_operation"] = "START"
     state["next_operation_parameters"] = {}

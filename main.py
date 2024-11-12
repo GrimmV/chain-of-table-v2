@@ -24,7 +24,7 @@ llm = ChatGPT(model_name=MODEL_NAME, key=API_KEY)
 def get_final_table(query, table, llm, caption: str, column_descriptions: dict) -> pd.DataFrame:
     next_operation = "START"
     pandas_table = pipe2table(table)
-    available_operations = list(possible_next_operations)
+    available_operations = list(possible_next_operations.keys())
     op_chain = []
     inputs = {
         "llm": llm,
