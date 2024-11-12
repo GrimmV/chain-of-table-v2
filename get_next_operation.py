@@ -28,12 +28,13 @@ def get_next_operation(
     next_operations: list[str] = list(possible_next_operations.keys())
 ) -> dict:
 
-    prompt = next_operation_prompt(next_operations, query, table_content)
+    prompt = next_operation_prompt(next_operations, table_content)
 
-    response = llm.generate(
-        prompt,
-        response_model=NextOperation,
-        system_message="You are a helpful assistant and expert in transforming tables based on python pandas operations.",
+    response = llm.generate_structured_reasoning_response(
+        query,
+        context=prompt,
     )
+    
+    print(response.reasoning)
 
-    return response.next_operation
+    return response.final_response

@@ -4,8 +4,7 @@ from graph.GraphState import GraphState
 
 def next_operation(state: GraphState) -> GraphState:
     
-    # print(state["next_operation"])
-    # print(state["table"])
+    print(state["next_operation"])
     
     query = state["query"]
     table = state["table"]
@@ -18,6 +17,10 @@ def next_operation(state: GraphState) -> GraphState:
     next_operation = get_next_operation(query, pipe_table, llm, available_operations)
     
     state["next_operation"] = next_operation
-    state["available_operations"].remove(next_operation)
+    if next_operation not in available_operations:
+        state["next_operation"] = "None"
+    else:
+        available_operations.remove(next_operation)
+        state["available_operations"] = available_operations
     
     return state

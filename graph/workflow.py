@@ -27,11 +27,15 @@ def decide_cat_path(state):
 
 def decide_end(state):
     operation_chain = state["operation_chain"]
+    available_operations = state["available_operations"]
     last_operation = state["next_operation"]
     table = state["table"]
     table_is_empty = table.empty
     last_operation_is_none = last_operation == "None"
     more_than_max_operations = len(operation_chain) >= max_operations
+    print(state["query"])
+    print(available_operations)
+    print(operation_chain)
     out = (
         "end"
         if more_than_max_operations or last_operation_is_none or table_is_empty
@@ -92,7 +96,5 @@ def get_workflow():
     workflow.add_conditional_edges(
         "sort_column", decide_end, {"loop": "get_next_operation", "end": END}
     )
-
-    # workflow.add_edge("reset_state", END)
 
     return workflow.compile()

@@ -22,6 +22,9 @@ class SelectRowParams(BaseModel):
         if column not in columns:
             raise ValueError(f"The specified column '{column}' does not exist. Available columns are {columns}")
         column_is_numeric = column_types[column]["is_numeric"]
+        if column_is_numeric:
+            raise ValueError(f"The specified column '{column}' is numeric. You are only allowed to filter non-numeric columns.")
+            
         value = info.data.get('value')
         # elif isinstance(value, (int, float)) and not column_is_numeric:
         #     print(f"the value is a number: {value}")
@@ -72,16 +75,16 @@ def select_row(df: pd.DataFrame, conditions: List[Dict]) -> pd.DataFrame:
 
 def get_select_row_params(query: str, table: str, validation_context: Dict, llm: ChatGPT, column_descriptions: Dict) -> List[Dict]:
     
+    
+    
     prompt = select_row_params_prompt(query, table, column_descriptions)
     
     response = llm.generate(
         prompt,
         response_model=List[SelectRowParams],
-        system_message="You are a helpful assistant and expert in transforming tables based on python pandas operations.",
+        system_message="You are a helpful assistant and expert in transforming tables.",
         validation_context=validation_context
     )
-    
-    print(response)
     
     
     dict_response = []

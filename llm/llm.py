@@ -14,10 +14,11 @@
 
 import instructor
 from openai import OpenAI
-import time
-import numpy as np
-from dataclasses import dataclass, asdict
+from dataclasses import dataclass
 from llm.logger import log_kwargs, log_exception
+from pydantic import BaseModel
+from textwrap import dedent
+from prompt_engineering.structured_reasoning import StructuredReasoningBaseResponse
 
 
 @dataclass
@@ -61,3 +62,31 @@ class ChatGPT:
         )
 
         return gpt_response
+    
+    def generate_structured_reasoning_response(self, query: str, context: str):
+        response = self.client.chat.completions.create(
+            model=self.model_name,
+            response_model=StructuredReasoningBaseResponse,
+            messages=[
+                {
+                    "role": "system",
+                    "content": dedent(
+                        f"""
+                    <system>
+                        <role>expert in applying table operations</role>
+                        <instruction>Make sure to output your reasoning in structured reasoning steps before generating a response to the user's query.</instruction>
+                    </system>
+
+                    <context>
+                        {context}
+                    </context>
+
+                    <query>
+                        {query}
+                    </query>
+                    """
+                    ),
+                },
+            ],
+        )
+        return response

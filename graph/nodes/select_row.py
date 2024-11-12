@@ -12,7 +12,8 @@ def select_row(state: GraphState) -> GraphState:
     new_table = selectrow(table, conditions)
     
     state["table"] = new_table
-    state["operation_chain"].append({"func": "select_row", "params": params})
+    operation_chain.append({"func": "select_row", "params": params})
     state["operation_chain"] = operation_chain
+    state["available_operations"]
     
     return state
