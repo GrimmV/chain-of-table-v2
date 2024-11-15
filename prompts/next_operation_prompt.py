@@ -17,8 +17,6 @@ def next_operation_prompt(operations: list[str], table: str) -> str:
         Choose an Operation: Identify one operation you believe should be performed next. 
         
         The available operations are: {described_operations} and None
-        
-        Explain why this operation is necessary.
 
     Constraints:
 

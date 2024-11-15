@@ -1,0 +1,93 @@
+user query: Der Unterschied zwischen aktuellem Umsatz und dem des Vorjahres, liegt bei Kunde xql8486gncqz97ds4rro bei 99804.1
+function chain:
+Selected rows based on the following conditions:
+Kunde contains xql8486gncqz97ds4rro, 
+table caption : Tabelle der Kunden und deren Umsatz des aktuellen (AJ) und vorherigen Jahres (VJ)
+col : Kunde | Umsatz VJ | Umsatz AJ
+row 1 : xql8486gncqz97ds4rro | 998041 | 1097845.1
+evaluation output:
+model evaluation: False
+baseline output:
+model evaluation: False
+label: True
+
+user query: Der Unterschied zwischen aktuellem Umsatz und dem des Vorjahres, liegt bei Kunde qdu09ljeyx2mvigegpfn bei 99804.1
+function chain:
+Selected rows based on the following conditions:
+Kunde contains qdu09ljeyx2mvigegpfn, 
+table caption : Tabelle der Kunden und deren Umsatz des aktuellen (AJ) und vorherigen Jahres (VJ)
+col : Kunde | Umsatz VJ | Umsatz AJ
+row 1 : qdu09ljeyx2mvigegpfn | 869034 | 955937.4
+evaluation output:
+model evaluation: False
+baseline output:
+model evaluation: False
+label: False
+
+user query: Der Unterschied zwischen aktuellem Umsatz und dem des Vorjahres, liegt bei Kunde xql8486gncqz97ds4rro bei 9098.1
+function chain:
+Selected rows based on the following conditions:
+Kunde contains xql8486gncqz97ds4rro, 
+table caption : Tabelle der Kunden und deren Umsatz des aktuellen (AJ) und vorherigen Jahres (VJ)
+col : Kunde | Umsatz VJ | Umsatz AJ
+row 1 : xql8486gncqz97ds4rro | 998041 | 1097845.1
+evaluation output:
+model evaluation: False
+baseline output:
+model evaluation: False
+label: False
+
+user query: Der Unterschied zwischen aktuellem Umsatz und dem des Vorjahres, liegt bei Kunde k2pyidwm27t96va1vp22 bei 40540.2
+function chain:
+Selected rows based on the following conditions:
+Kunde contains k2pyidwm27t96va1vp22, 
+table caption : Tabelle der Kunden und deren Umsatz des aktuellen (AJ) und vorherigen Jahres (VJ)
+col : Kunde | Umsatz VJ | Umsatz AJ
+row 1 : k2pyidwm27t96va1vp22 | 405402 | 445942.2
+evaluation output:
+model evaluation: False
+baseline output:
+model evaluation: False
+label: True
+
+user query: Der Unterschied zwischen aktuellem Umsatz und dem des Vorjahres, liegt bei Kunde k2pyidwm27t96va1vp22 bei 35000.1
+function chain:
+Selected rows based on the following conditions:
+Kunde contains k2pyidwm27t96va1vp22, 
+table caption : Tabelle der Kunden und deren Umsatz des aktuellen (AJ) und vorherigen Jahres (VJ)
+col : Kunde | Umsatz VJ | Umsatz AJ
+row 1 : k2pyidwm27t96va1vp22 | 405402 | 445942.2
+evaluation output:
+model evaluation: False
+baseline output:
+model evaluation: False
+label: False
+
+user query: Der Unterschied zwischen aktuellem Umsatz und dem des Vorjahres, liegt bei Kunde haboflamd2voqri5jglt bei 99804.1
+function chain:
+Selected rows based on the following conditions:
+Kunde contains haboflamd2voqri5jglt, 
+table caption : Tabelle der Kunden und deren Umsatz des aktuellen (AJ) und vorherigen Jahres (VJ)
+col : Kunde | Umsatz VJ | Umsatz AJ
+row 1 : haboflamd2voqri5jglt | 668182 | 735000.2
+evaluation output:
+model evaluation: False
+baseline output:
+model evaluation: False
+label: False
+
+user query: Der Unterschied zwischen aktuellem Umsatz und dem des Vorjahres, liegt bei Kunde haboflamd2voqri5jglt bei 66818.2
+function chain:
+Selected rows based on the following conditions:
+Kunde contains haboflamd2voqri5jglt, 
+table caption : Tabelle der Kunden und deren Umsatz des aktuellen (AJ) und vorherigen Jahres (VJ)
+col : Kunde | Umsatz VJ | Umsatz AJ
+row 1 : haboflamd2voqri5jglt | 668182 | 735000.2
+evaluation output:
+model evaluation: False
+baseline output:
+model evaluation: False
+label: True
+
+ealuation ratio: 0.5714285714285714
+baseline ratio: 0.5714285714285714

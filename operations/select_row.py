@@ -65,7 +65,10 @@ def select_row(df: pd.DataFrame, conditions: List[Dict]) -> pd.DataFrame:
             
         masks.append(mask)
     
-    combined_mask = masks[0]
+    if len(masks) > 0:
+        combined_mask = masks[0]
+    else:
+        return df
     if len(masks) > 1:
         for mask in masks[1:]:
             combined_mask &= mask
@@ -83,14 +86,11 @@ def get_select_row_params(query: str, table: str, validation_context: Dict, llm:
         query,
         prompt,
         response_model=List[SelectRowParams],
-        system_message="You are a helpful assistant and expert in transforming tables.",
         validation_context=validation_context
     )
-    
     
     dict_response = []
     for elem in response:
         dict_response.append(elem.dict())
-
 
     return dict_response

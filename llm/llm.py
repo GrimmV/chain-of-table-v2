@@ -18,7 +18,7 @@ from dataclasses import dataclass
 from llm.logger import log_kwargs, log_exception
 from pydantic import BaseModel
 from textwrap import dedent
-from prompt_engineering.structured_reasoning import StructuredReasoningBaseResponse
+from prompt_engineering.structured_reasoning import generate_structured_response
 
 
 @dataclass
@@ -40,50 +40,47 @@ class ChatGPT:
     def generate(
         self,
         query: str,
-        context: str,
+        prompt: str,
         response_model,
-        max_retries: int = 3,
-        validation_context: dict=None,
+        max_retries: int = 10,
+        validation_context: dict = None,
         system_message: str = "You are a helpful assistant.",
     ):
 
         messages = [
-                {
-                    "role": "system",
-                    "content": dedent(
-                        f"""
-                    <system>
-                        <role>expert in applying table operations</role>
-                        <instruction>{system_message}</instruction>
-                    </system>
-
-                    <context>
-                        {context}
-                    </context>
-                    """
-                    )
-                },
-                {"role": "user", "content": query},
-            ]
-        
+            {
+                "role": "system",
+                "content": system_message,
+            },
+            {"role": "user", "content": prompt},
+        ]
         gpt_response = self.client.chat.completions.create(
             model=self.model_name,
             messages=messages,
             max_retries=max_retries,
             response_model=response_model,
             validation_context=validation_context,
-            temperature=0.1,
         )
 
         return gpt_response
-    
-    def generate_structured_reasoning_response(self, query: str, context: str):
+
+    def generate_structured_reasoning_response(
+        self,
+        query: str,
+        context: str,
+        response_model: BaseModel,
+        validation_context: dict = None,
+        max_retries: int = 10,
+    ):
         response = self.client.chat.completions.create(
             model=self.model_name,
-            response_model=StructuredReasoningBaseResponse,
+            response_model=generate_structured_response(response_model),
+            max_retries=max_retries,
+            validation_context=validation_context,
             messages=[
+                {"role": "system", "content": "you are a helpful assistant"},
                 {
-                    "role": "system",
+                    "role": "user",
                     "content": dedent(
                         f"""
                     <system>

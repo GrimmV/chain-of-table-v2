@@ -33,9 +33,6 @@ def decide_end(state):
     table_is_empty = table.empty
     last_operation_is_none = last_operation == "None"
     more_than_max_operations = len(operation_chain) >= max_operations
-    print(state["query"])
-    print(available_operations)
-    print(operation_chain)
     out = (
         "end"
         if more_than_max_operations or last_operation_is_none or table_is_empty

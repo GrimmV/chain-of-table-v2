@@ -16,13 +16,12 @@ class StructuredReasoningBaseResponse(BaseModel):
     reasoning: list[ReasoningStep] = Field(
         description="reasoning steps to derive answer",
     )
-    final_response: str
 
-# def generate_structured_response(response_model: BaseModel) -> BaseModel:
-#     StructuredReasoningResponse = create_model(
-#         "StructuredReasoningResponse",
-#         final_response=(response_model, ...),
-#         __base__=StructuredReasoningBaseResponse
-#     )
+def generate_structured_response(response_model: BaseModel) -> BaseModel:
+    StructuredReasoningResponse = create_model(
+        "StructuredReasoningResponse",
+        final_response=(response_model, ...),
+        __base__=StructuredReasoningBaseResponse
+    )
     
-#     return StructuredReasoningResponse
+    return StructuredReasoningResponse

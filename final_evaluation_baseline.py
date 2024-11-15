@@ -11,7 +11,7 @@ def final_evaluation_baseline(query: str, table: str, llm: ChatGPT):
     
     prompt = final_evaluation_baseline_prompt(query, table)
     
-    response = llm.generate_structured_reasoning_response(query, prompt)
+    response = llm.generate(query, prompt, FinalEval)
     
     return response.model_dump()
     

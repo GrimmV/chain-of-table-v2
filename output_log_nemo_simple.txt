@@ -1,0 +1,120 @@
+user query: Der Unterschied zwischen aktuellem Umsatz und dem des Vorjahres, liegt bei Kunde xql8486gncqz97ds4rro bei 99804.1
+function chain:
+Selected rows based on the following conditions:
+Kunde contains , 
+table caption : Tabelle der Kunden und deren Umsatz des aktuellen (AJ) und vorherigen Jahres (VJ)
+col : Kunde | Umsatz VJ | Umsatz AJ
+row 1 : k2pyidwm27t96va1vp22 | 405402 | 445942.2
+row 2 : kony1utqyy5d1rp2ggij | 484774 | 533251.4
+row 3 : 96agzd27afit3wsknp6g | 790171 | 869188.1
+row 4 : qdu09ljeyx2mvigegpfn | 869034 | 955937.4
+row 5 : zgghy6aow857bmdjj1wr | 135227 | 148749.7
+
+evaluation output:
+The difference between current (AJ) and previous year's (VJ) sales for customer xql8486gncqz97ds4rro is not 99804.1 according to the provided table.
+model evaluation: False
+baseline output:
+The given object is missing required fields 'istrue' and 'explanation'.
+model evaluation: False
+label: True
+
+user query: Der Unterschied zwischen aktuellem Umsatz und dem des Vorjahres, liegt bei Kunde qdu09ljeyx2mvigegpfn bei 99804.1
+function chain:
+Selected rows based on the following conditions:
+Kunde contains qdu09ljeyx2mvigegpfn, 
+table caption : Tabelle der Kunden und deren Umsatz des aktuellen (AJ) und vorherigen Jahres (VJ)
+col : Kunde | Umsatz VJ | Umsatz AJ
+row 1 : qdu09ljeyx2mvigegpfn | 869034 | 955937.4
+evaluation output:
+The difference between the current year's (AJ) and the previous year's (VJ) sales for customer qdu09ljeyx2mvigegpfn is actually 869034 - 955937.4 = -86943.4, not 99804.1 as stated in the statement.
+model evaluation: False
+baseline output:
+Row 50 has a greater value than row 51 in terms of column 2.
+model evaluation: True
+label: False
+
+user query: Der Unterschied zwischen aktuellem Umsatz und dem des Vorjahres, liegt bei Kunde xql8486gncqz97ds4rro bei 9098.1
+function chain:
+Selected rows based on the following conditions:
+Kunde contains xql8486gncqz97ds4rro, 
+table caption : Tabelle der Kunden und deren Umsatz des aktuellen (AJ) und vorherigen Jahres (VJ)
+col : Kunde | Umsatz VJ | Umsatz AJ
+row 1 : xql8486gncqz97ds4rro | 998041 | 1097845.1
+evaluation output:
+The difference between current revenue (AJ) and last year's revenue (VJ) for customer xql8486gncqz97ds4rro is actually 1097845.1 - 998041 = 99706.1, not 9098.1.
+model evaluation: False
+baseline output:
+The table provided does not contain sufficient context to determine the truth of the given statement or how it should be evaluated.
+model evaluation: False
+label: False
+
+user query: Der Unterschied zwischen aktuellem Umsatz und dem des Vorjahres, liegt bei Kunde k2pyidwm27t96va1vp22 bei 40540.2
+function chain:
+Selected rows based on the following conditions:
+Kunde contains Kunde k2pyidwm27t96va1vp22, 
+table caption : Tabelle der Kunden und deren Umsatz des aktuellen (AJ) und vorherigen Jahres (VJ)
+col : Kunde | Umsatz VJ | Umsatz AJ
+
+evaluation output:
+The difference between current revenue and the previous year's revenue for customer 'k2pyidwm27t96va1vp22' is not 40540.2 according to the provided table. The actual difference can be calculated as follows:
+
+The revenue from current year (AJ) for this customer is: 38500.0
+The revenue from the previous year (VJ) is: 42449.1
+So, the actual difference is: |38500.0 - 42449.1| = 41739.1.
+model evaluation: False
+baseline output:
+Row 9 does not contain the phrase 'Evaluate the user query'.
+model evaluation: False
+label: True
+
+user query: Der Unterschied zwischen aktuellem Umsatz und dem des Vorjahres, liegt bei Kunde k2pyidwm27t96va1vp22 bei 35000.1
+function chain:
+Selected rows based on the following conditions:
+Kunde contains k2pyidwm27t96va1vp22, 
+table caption : Tabelle der Kunden und deren Umsatz des aktuellen (AJ) und vorherigen Jahres (VJ)
+col : Kunde | Umsatz VJ | Umsatz AJ
+row 1 : k2pyidwm27t96va1vp22 | 405402 | 445942.2
+evaluation output:
+The difference between current turnover (Umsatz AJ) and last year's turnover (Umsatz VJ) for customer k2pyidwm27t6va1vp22 is 405402 - 445942.2 = -37842, not 35000.1 as stated in the user's query.
+model evaluation: False
+baseline output:
+I have understood and parsed the content according to the given JSON schema.
+model evaluation: True
+label: False
+
+user query: Der Unterschied zwischen aktuellem Umsatz und dem des Vorjahres, liegt bei Kunde haboflamd2voqri5jglt bei 99804.1
+function chain:
+Selected rows based on the following conditions:
+Kunde contains haboflamd2voqri5jglt, 
+table caption : Tabelle der Kunden und deren Umsatz des aktuellen (AJ) und vorherigen Jahres (VJ)
+col : Kunde | Umsatz VJ | Umsatz AJ
+row 1 : haboflamd2voqri5jglt | 668182 | 735000.2
+evaluation output:
+The difference between the current Umsatz and the previous year's for customer 'haboflamd2voqri5jglt' is calculated as follows:
+- Current Umsatz (Umsatz AJ): 735000.2
+- Previous Year's Umsatz (Umsatz VJ): 668182
+Difference: |735000.2 - 668182| = 66828.2
+The provided difference of 99804.1 is not accurate.
+model evaluation: False
+baseline output:
+The statement provided does not match any row in the given table.
+model evaluation: False
+label: False
+
+user query: Der Unterschied zwischen aktuellem Umsatz und dem des Vorjahres, liegt bei Kunde haboflamd2voqri5jglt bei 66818.2
+function chain:
+Selected rows based on the following conditions:
+Kunde contains haboflamd2voqri5jglt, 
+table caption : Tabelle der Kunden und deren Umsatz des aktuellen (AJ) und vorherigen Jahres (VJ)
+col : Kunde | Umsatz VJ | Umsatz AJ
+row 1 : haboflamd2voqri5jglt | 668182 | 735000.2
+evaluation output:
+The difference between haboflamd2voqri5jglt's current year Umsatz (735000.2) and their Umsatz from the previous year (668182) is indeed 66818.2.
+model evaluation: True
+baseline output:
+The sum of the second column is not greater than the first column.
+model evaluation: False
+label: True
+
+ealuation ratio: 0.7142857142857143
+baseline ratio: 0.2857142857142857

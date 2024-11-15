@@ -23,7 +23,7 @@ def select_row_params_prompt(query, table, column_descriptions):
     Make sure that the filter condition is valid and respects the values and spelling from the column of the given table.
     Only filter for numbers if it is explicitely necessary.
     
-    Output:
+    Do not reason beyond your task of calculating the filter conditions.
     """
     
     return prompt

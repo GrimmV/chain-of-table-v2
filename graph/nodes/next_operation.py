@@ -4,8 +4,6 @@ from graph.GraphState import GraphState
 
 def next_operation(state: GraphState) -> GraphState:
     
-    print(state["next_operation"])
-    
     query = state["query"]
     table = state["table"]
     llm = state["llm"]

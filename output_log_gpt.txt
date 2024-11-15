@@ -1,0 +1,107 @@
+user query: Der Unterschied zwischen aktuellem Umsatz und dem des Vorjahres, liegt bei Kunde xql8486gncqz97ds4rro bei 99804.1
+function chain:
+Selected rows based on the following conditions:
+Kunde contains Kunde xql8486gncqz97ds4rro, 
+table caption : Tabelle der Kunden und deren Umsatz des aktuellen (AJ) und vorherigen Jahres (VJ)
+col : Kunde | Umsatz VJ | Umsatz AJ
+
+evaluation output:
+[{'step': 1, 'subquestion': 'Extract the corresponding rows for the customer xql8486gncqz97ds4rro from the table.', 'procedure': 'Look for rows that match Kunde xql8486gncqz97ds4rro in the table.', 'result': 'Selected row: Kunde xql8486gncqz97ds4rro, Umsatz VJ = [value], Umsatz AJ = [value].'}, {'step': 2, 'subquestion': "Calculate the difference between the current year's Umsatz (Umsatz AJ) and the previous year's Umsatz (Umsatz VJ).", 'procedure': 'Difference = Umsatz AJ - Umsatz VJ.', 'result': 'Calculated difference: [resultant value].'}, {'step': 3, 'subquestion': "Compare the calculated difference to the user's statement value of 99804.1.", 'procedure': 'Check if the calculated difference equals 99804.1.', 'result': 'Is the difference equal to 99804.1? [true/false]'}]
+model evaluation: True
+baseline output:
+[{'step': 1, 'subquestion': 'Identify the Umsatz VJ and Umsatz AJ for Kunde xql8486gncqz97ds4rro.', 'procedure': '', 'result': 'Umsatz VJ = 998041, Umsatz AJ = 1097845.1'}, {'step': 2, 'subquestion': 'Calculate the difference between Umsatz AJ and Umsatz VJ.', 'procedure': '1097845.1 - 998041', 'result': '99804.1'}, {'step': 3, 'subquestion': "Compare the calculated difference with the user's statement.", 'procedure': '', 'result': "The calculated difference is 99804.1 which matches the user's statement."}]
+model evaluation: True
+label: True
+
+user query: Der Unterschied zwischen aktuellem Umsatz und dem des Vorjahres, liegt bei Kunde qdu09ljeyx2mvigegpfn bei 99804.1
+function chain:
+Selected rows based on the following conditions:
+Kunde contains qdu09ljeyx2mvigegpfn, 
+table caption : Tabelle der Kunden und deren Umsatz des aktuellen (AJ) und vorherigen Jahres (VJ)
+col : Kunde | Umsatz VJ | Umsatz AJ
+row 1 : qdu09ljeyx2mvigegpfn | 869034 | 955937.4
+evaluation output:
+[{'step': 1, 'subquestion': 'What are the revenue values for customer qdu09ljeyx2mvigegpfn for the current and previous years?', 'procedure': 'Selected the row where Kunde is qdu09ljeyx2mvigegpfn.', 'result': 'Umsatz VJ = 869034, Umsatz AJ = 955937.4'}, {'step': 2, 'subquestion': 'What is the difference between the current revenue and the previous revenue for customer qdu09ljeyx2mvigegpfn?', 'procedure': 'Calculated the difference: Umsatz AJ - Umsatz VJ = 955937.4 - 869034', 'result': 'Difference = 86903.4'}]
+model evaluation: False
+baseline output:
+[{'step': 1, 'subquestion': "What is the 'Umsatz VJ' for the customer 'qdu09ljeyx2mvigegpfn'?", 'procedure': '', 'result': '869034'}, {'step': 2, 'subquestion': "What is the 'Umsatz AJ' for the customer 'qdu09ljeyx2mvigegpfn'?", 'procedure': '', 'result': '955937.4'}, {'step': 3, 'subquestion': "What is the difference between 'Umsatz AJ' and 'Umsatz VJ'?", 'procedure': '955937.4 - 869034', 'result': '99803.4'}]
+model evaluation: False
+label: False
+
+user query: Der Unterschied zwischen aktuellem Umsatz und dem des Vorjahres, liegt bei Kunde xql8486gncqz97ds4rro bei 9098.1
+function chain:
+Selected rows based on the following conditions:
+Kunde contains N/A, 
+table caption : Tabelle der Kunden und deren Umsatz des aktuellen (AJ) und vorherigen Jahres (VJ)
+col : Kunde | Umsatz VJ | Umsatz AJ
+
+evaluation output:
+[{'step': 1, 'subquestion': 'Was ist der Umsatz des Vorjahres für Kunde xql8486gncqz97ds4rro?', 'procedure': '', 'result': 'Der Umsatz des Vorjahres kann in der Tabelle gefunden werden.'}, {'step': 2, 'subquestion': 'Was ist der Umsatz des aktuellen Jahres für Kunde xql8486gncqz97ds4rro?', 'procedure': '', 'result': 'Der Umsatz des aktuellen Jahres kann ebenfalls in der Tabelle gefunden werden.'}, {'step': 3, 'subquestion': 'Wie viel beträgt der Unterschied zwischen aktuellem Umsatz und dem des Vorjahres für Kunde xql8486gncqz97ds4rro?', 'procedure': 'Umsatz AJ - Umsatz VJ', 'result': 'Der Unterschied muss berechnet werden.'}, {'step': 4, 'subquestion': 'Stimmt der berechnete Unterschied mit 9098.1 überein?', 'procedure': '', 'result': 'Das Ergebnis des Unterschieds muss mit 9098.1 verglichen werden.'}]
+model evaluation: False
+baseline output:
+[{'step': 1, 'subquestion': "What is the previous year's revenue (Umsatz VJ) for Kunde xql8486gncqz97ds4rro?", 'procedure': '', 'result': '998041'}, {'step': 2, 'subquestion': "What is the current year's revenue (Umsatz AJ) for Kunde xql8486gncqz97ds4rro?", 'procedure': '', 'result': '1097845.1'}, {'step': 3, 'subquestion': "Calculate the difference between current year's revenue and previous year's revenue.", 'procedure': '1097845.1 - 998041', 'result': '100804.1'}]
+model evaluation: False
+label: False
+
+user query: Der Unterschied zwischen aktuellem Umsatz und dem des Vorjahres, liegt bei Kunde k2pyidwm27t96va1vp22 bei 40540.2
+function chain:
+Selected rows based on the following conditions:
+Kunde contains k2pyidwm27t96va1vp22, 
+table caption : Tabelle der Kunden und deren Umsatz des aktuellen (AJ) und vorherigen Jahres (VJ)
+col : Kunde | Umsatz VJ | Umsatz AJ
+row 1 : k2pyidwm27t96va1vp22 | 405402 | 445942.2
+evaluation output:
+[{'step': 1, 'subquestion': "What is the Umsatz VJ (previous year's revenue) for Kunde k2pyidwm27t96va1vp22?", 'procedure': '', 'result': '405402'}, {'step': 2, 'subquestion': "What is the Umsatz AJ (current year's revenue) for Kunde k2pyidwm27t96va1vp22?", 'procedure': '', 'result': '445942.2'}, {'step': 3, 'subquestion': 'What is the difference between current Umsatz and previous Umsatz for Kunde k2pyidwm27t96va1vp22?', 'procedure': '445942.2 - 405402', 'result': '40440.2'}]
+model evaluation: False
+baseline output:
+[{'step': 1, 'subquestion': 'What is the current revenue (Umsatz AJ) for customer k2pyidwm27t96va1vp22?', 'procedure': '', 'result': '445942.2'}, {'step': 2, 'subquestion': "What is the previous year's revenue (Umsatz VJ) for customer k2pyidwm27t96va1vp22?", 'procedure': '', 'result': '405402'}, {'step': 3, 'subquestion': "What is the difference between the current and previous year's revenue for customer k2pyidwm27t96va1vp22?", 'procedure': '445942.2 - 405402', 'result': '40440.2'}]
+model evaluation: False
+label: True
+
+user query: Der Unterschied zwischen aktuellem Umsatz und dem des Vorjahres, liegt bei Kunde k2pyidwm27t96va1vp22 bei 35000.1
+function chain:
+Selected rows based on the following conditions:
+Kunde contains k2pyidwm27t96va1vp22, 
+table caption : Tabelle der Kunden und deren Umsatz des aktuellen (AJ) und vorherigen Jahres (VJ)
+col : Kunde | Umsatz VJ | Umsatz AJ
+row 1 : k2pyidwm27t96va1vp22 | 405402 | 445942.2
+evaluation output:
+[{'step': 1, 'subquestion': 'What is the current revenue for customer k2pyidwm27t96va1vp22?', 'procedure': '', 'result': '445942.2'}, {'step': 2, 'subquestion': "What is the previous year's revenue for customer k2pyidwm27t96va1vp22?", 'procedure': '', 'result': '405402'}, {'step': 3, 'subquestion': "What is the difference between the current revenue and the previous year's revenue?", 'procedure': '445942.2 - 405402', 'result': '4040.2'}, {'step': 4, 'subquestion': 'Is the difference 35000.1 as stated?', 'procedure': '', 'result': 'No.'}]
+model evaluation: False
+baseline output:
+[{'step': 1, 'subquestion': 'What is the Umsatz VJ (previous year revenue) for Kunde k2pyidwm27t96va1vp22?', 'procedure': '', 'result': '405402'}, {'step': 2, 'subquestion': 'What is the Umsatz AJ (current year revenue) for Kunde k2pyidwm27t96va1vp22?', 'procedure': '', 'result': '445942.2'}, {'step': 3, 'subquestion': 'What is the difference between Umsatz AJ and Umsatz VJ for Kunde k2pyidwm27t96va1vp22?', 'procedure': '445942.2 - 405402', 'result': '40540.2'}]
+model evaluation: False
+label: False
+
+user query: Der Unterschied zwischen aktuellem Umsatz und dem des Vorjahres, liegt bei Kunde haboflamd2voqri5jglt bei 99804.1
+function chain:
+Selected rows based on the following conditions:
+Kunde contains Kunde, 
+table caption : Tabelle der Kunden und deren Umsatz des aktuellen (AJ) und vorherigen Jahres (VJ)
+col : Kunde | Umsatz VJ | Umsatz AJ
+
+evaluation output:
+[{'step': 1, 'subquestion': 'What are the columns in the table?', 'procedure': '', 'result': "The columns in the table are 'Kunde', 'Umsatz VJ' (previous year's revenue), and 'Umsatz AJ' (current year's revenue)."}, {'step': 2, 'subquestion': 'What customer is referenced in the statement?', 'procedure': '', 'result': "The customer referenced in the statement is 'haboflamd2voqri5jglt'."}, {'step': 3, 'subquestion': "What is the current and previous year’s revenue for customer 'haboflamd2voqri5jglt'?", 'procedure': "Refer to the table to find the revenue values for 'haboflamd2voqri5jglt'.", 'result': 'Assuming the values from the table are Umsatz VJ = X and Umsatz AJ = Y, where X and Y are the respective revenues.'}, {'step': 4, 'subquestion': 'What is the difference between the current Umsatz (Y) and the Umsatz of the previous year (X)?', 'procedure': 'Calculate the difference as Y - X.', 'result': 'This will yield the difference in revenue.'}, {'step': 5, 'subquestion': 'Does the calculated difference equal 99804.1?', 'procedure': 'Compare the calculated difference with 99804.1.', 'result': 'If the calculated difference equals 99804.1, then the statement is true; otherwise, it is false.'}]
+model evaluation: False
+baseline output:
+[{'step': 1, 'subquestion': 'What are the Umsatz VJ and Umsatz AJ for Kunde haboflamd2voqri5jglt?', 'procedure': 'Look for Kunde haboflamd2voqri5jglt in the table and extract Umsatz VJ and Umsatz AJ.', 'result': 'Umsatz VJ = 668182, Umsatz AJ = 735000.2.'}, {'step': 2, 'subquestion': 'Calculate the difference between Umsatz AJ and Umsatz VJ.', 'procedure': 'Calculate 735000.2 - 668182.', 'result': 'The difference = 66818.2.'}, {'step': 3, 'subquestion': 'Is the calculated difference equal to 99804.1?', 'procedure': 'Compare the difference calculated in step 2 with 99804.1.', 'result': '66818.2 is not equal to 99804.1.'}]
+model evaluation: False
+label: False
+
+user query: Der Unterschied zwischen aktuellem Umsatz und dem des Vorjahres, liegt bei Kunde haboflamd2voqri5jglt bei 66818.2
+function chain:
+Selected rows based on the following conditions:
+Kunde contains haboflamd2voqri5jglt, 
+table caption : Tabelle der Kunden und deren Umsatz des aktuellen (AJ) und vorherigen Jahres (VJ)
+col : Kunde | Umsatz VJ | Umsatz AJ
+row 1 : haboflamd2voqri5jglt | 668182 | 735000.2
+evaluation output:
+[{'step': 1, 'subquestion': 'What are the current and previous year revenues for the customer haboflamd2voqri5jglt?', 'procedure': '', 'result': 'Umsatz VJ = 668182, Umsatz AJ = 735000.2'}, {'step': 2, 'subquestion': "What is the difference between the current revenue and the previous year's revenue for haboflamd2voqri5jglt?", 'procedure': '735000.2 - 668182', 'result': 'The difference is 66818.2.'}, {'step': 3, 'subquestion': "Is the calculated difference equal to the user's statement?", 'procedure': "Comparing 66818.2 with the user's statement value of 66818.2", 'result': 'Yes, they are equal.'}]
+model evaluation: True
+baseline output:
+[{'step': 1, 'subquestion': "What is the previous year's revenue (Umsatz VJ) for Kunde haboflamd2voqri5jglt?", 'procedure': '', 'result': '668182'}, {'step': 2, 'subquestion': "What is the current year's revenue (Umsatz AJ) for Kunde haboflamd2voqri5jglt?", 'procedure': '', 'result': '735000.2'}, {'step': 3, 'subquestion': "What is the difference between the current year's revenue and the previous year's revenue?", 'procedure': '735000.2 - 668182', 'result': '66818.2'}, {'step': 4, 'subquestion': 'Is this difference equal to 66818.2?', 'procedure': '', 'result': 'True'}]
+model evaluation: True
+label: True
+
+ealuation ratio: 0.8571428571428571
+baseline ratio: 0.8571428571428571

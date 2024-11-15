@@ -2,7 +2,7 @@ from openai import OpenAI
 from pydantic import BaseModel
 from textwrap import dedent
 from llm.logger import log_kwargs, log_exception
-from prompt_engineering.structured_reasoning import StructuredReasoningBaseResponse
+from prompt_engineering.structured_reasoning import generate_structured_response
 
 import instructor
 
@@ -24,35 +24,20 @@ class OllamaOpenAI:
     def generate(
         self,
         query: str,
-        context: str,
-        response_model: BaseModel,
-        max_retries: int = 6,
-        validation_context: dict=None,
+        prompt: str,
+        response_model,
+        max_retries: int = 10,
+        validation_context: dict = None,
         system_message: str = "You are a helpful assistant.",
     ):
 
         messages = [
-                {
-                    "role": "system",
-                    "content": dedent(
-                        f"""
-                    <system>
-                        <role>expert in applying table operations</role>
-                        <instruction>{system_message}</instruction>
-                    </system>
-
-                    <context>
-                        {context}
-                    </context>
-
-                    <query>
-                        {query}
-                    </query>
-                    """
-                    )
-                }
-            ]
-        
+            {
+                "role": "system",
+                "content": system_message,
+            },
+            {"role": "user", "content": prompt},
+        ]
         gpt_response = self.client.chat.completions.create(
             model=self.model_name,
             messages=messages,
@@ -67,15 +52,19 @@ class OllamaOpenAI:
         self,
         query: str,
         context: str,
-        max_retries: int = 6,
+        response_model: BaseModel,
+        validation_context: dict = None,
+        max_retries: int = 10,
     ):
         response = self.client.chat.completions.create(
             model=self.model_name,
-            response_model=StructuredReasoningBaseResponse,
-            # max_retries=max_retries,
+            response_model=generate_structured_response(response_model),
+            max_retries=max_retries,
+            validation_context=validation_context,
             messages=[
+                {"role": "system", "content": "you are a helpful assistant"},
                 {
-                    "role": "system",
+                    "role": "user",
                     "content": dedent(
                         f"""
                     <system>
