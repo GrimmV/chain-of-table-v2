@@ -3,7 +3,7 @@ from typing import List
 from prompts.next_operation_prompt import next_operation_prompt
 from utils.next_operations import possible_next_operations
 
-from llm.llm import ChatGPT
+from llm.base_llm import BaseGPT
 
 
 class NextOperation(BaseModel):
@@ -24,7 +24,7 @@ class NextOperation(BaseModel):
 def get_next_operation(
     query: str,
     table_content: str,
-    llm: ChatGPT = None,
+    llm: BaseGPT = None,
     next_operations: list[str] = list(possible_next_operations.keys())
 ) -> dict:
 

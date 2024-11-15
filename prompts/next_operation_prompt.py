@@ -21,6 +21,7 @@ def next_operation_prompt(operations: list[str], table: str, query: str) -> str:
     Constraints:
 
         Do not assume that the table immediately provides the answer.
+        Do not add any parameters to the operations - provide only the operation name.
         Do not conclude the process prematurely. Always consider if another operation could refine or enhance the information.
 
     Examples:

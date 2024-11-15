@@ -17,15 +17,16 @@ from dotenv import load_dotenv
 load_dotenv()
 
 API_KEY = os.getenv('API_KEY')
-MODEL_NAME = os.getenv("MODEL_NAME")
+MODEL_NAME_NEMO = os.getenv("MODEL_NAME_NEMO")
+MODEL_NAME_GPT = os.getenv("MODEL_NAME_GPT")
 BASE_URL = os.getenv("BASE_URL")
 
-model = "gpt"
+model = "nemo"
 dataset = load_dataset("data/data.jsonl")
 if model == "nemo":
-    llm = OllamaOpenAI(model_name=MODEL_NAME, base_url=BASE_URL)
+    llm = OllamaOpenAI(model_name=MODEL_NAME_NEMO, base_url=BASE_URL)
 else:
-    llm = ChatGPT(model_name=MODEL_NAME, key=API_KEY)
+    llm = ChatGPT(model_name=MODEL_NAME_GPT, key=API_KEY)
     
 
 def get_final_table(query, table: pd.DataFrame, llm, caption: str, column_descriptions: dict) -> pd.DataFrame:
