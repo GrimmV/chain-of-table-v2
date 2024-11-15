@@ -23,27 +23,42 @@ class OllamaOpenAI:
 
     def generate(
         self,
-        prompt: str,
-        response_model,
+        query: str,
+        context: str,
+        response_model: BaseModel,
         max_retries: int = 6,
-        validation_context: dict = None,
+        validation_context: dict=None,
         system_message: str = "You are a helpful assistant.",
     ):
 
         messages = [
-            {
-                "role": "system",
-                "content": system_message,
-            },
-            {"role": "user", "content": prompt},
-        ]
+                {
+                    "role": "system",
+                    "content": dedent(
+                        f"""
+                    <system>
+                        <role>expert in applying table operations</role>
+                        <instruction>{system_message}</instruction>
+                    </system>
+
+                    <context>
+                        {context}
+                    </context>
+
+                    <query>
+                        {query}
+                    </query>
+                    """
+                    )
+                }
+            ]
+        
         gpt_response = self.client.chat.completions.create(
             model=self.model_name,
             messages=messages,
             max_retries=max_retries,
             response_model=response_model,
             validation_context=validation_context,
-            temperature=0.1,
         )
 
         return gpt_response

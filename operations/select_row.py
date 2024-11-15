@@ -80,6 +80,7 @@ def get_select_row_params(query: str, table: str, validation_context: Dict, llm:
     prompt = select_row_params_prompt(query, table, column_descriptions)
     
     response = llm.generate(
+        query,
         prompt,
         response_model=List[SelectRowParams],
         system_message="You are a helpful assistant and expert in transforming tables.",

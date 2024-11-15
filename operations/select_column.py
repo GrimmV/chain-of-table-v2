@@ -23,6 +23,7 @@ def get_select_column_params(query: str, table: str, validation_context: dict, l
     prompt = select_columns_params_prompt(query, table, column_descriptions)
     
     response = llm.generate(
+        query,
         prompt,
         response_model=SelectColumnsParams,
         system_message="You are a helpful assistant and expert in transforming tables based on python pandas operations.",

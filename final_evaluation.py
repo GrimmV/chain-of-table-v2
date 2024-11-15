@@ -11,8 +11,8 @@ def final_evaluation(query: str, op_chain: dict, table: str, llm: ChatGPT):
     
     prompt = final_evaluation_prompt(query, table, op_chain)
     
-    response = llm.generate(prompt, response_model=FinalEval, system_message="You are a helpful assistant that is an expert in table comprehension.")
+    response = llm.generate_structured_reasoning_response(query, prompt)
     
-    return response.dict()
+    return response.model_dump()
     
     

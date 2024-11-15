@@ -26,7 +26,8 @@ def _get_column_value(
                 
     """
     value = llm.generate(
-        prompt,
+        query="",
+        context=prompt,
         response_model=ColumnValue,
         system_message="You are a helpful assistant.",
     )
@@ -45,6 +46,7 @@ def get_add_column_parameters(
     prompt = add_column_params_prompt(query, table, column_descriptions)
 
     response = llm.generate(
+        query,
         prompt,
         response_model=AddColumnParams,
         system_message="You are a helpful assistant and expert in transforming tables based on python pandas operations.",

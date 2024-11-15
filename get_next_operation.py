@@ -30,11 +30,10 @@ def get_next_operation(
 
     prompt = next_operation_prompt(next_operations, table_content)
 
-    response = llm.generate_structured_reasoning_response(
+    response = llm.generate(
         query,
-        context=prompt,
+        prompt,
+        response_model=NextOperation
     )
-    
-    print(response.reasoning)
 
-    return response.final_response
+    return response.next_operation
