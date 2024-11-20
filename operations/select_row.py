@@ -21,9 +21,9 @@ class SelectRowParams(BaseModel):
         columns = column_types.keys()
         if column not in columns:
             raise ValueError(f"The specified column '{column}' does not exist. Available columns are {columns}")
-        column_is_numeric = column_types[column]["is_numeric"]
-        if column_is_numeric:
-            raise ValueError(f"The specified column '{column}' is numeric. You are only allowed to filter non-numeric columns.")
+        # column_is_numeric = column_types[column]["is_numeric"]
+        # if column_is_numeric:
+        #     raise ValueError(f"The specified column '{column}' is numeric. You are only allowed to filter non-numeric columns.")
             
         value = info.data.get('value')
         # elif isinstance(value, (int, float)) and not column_is_numeric:
@@ -57,7 +57,13 @@ def select_row(df: pd.DataFrame, conditions: List[Dict]) -> pd.DataFrame:
     
         if isinstance(value, str):
             if operator == "contains":
-                mask = eval(f"df['{column}'].str.contains('{value}')")
+                try:
+                    mask = eval(f"df['{column}'].str.contains('{value}')")
+                except:
+                    print("parsing error")
+                    print(value)
+                    mask = eval(f"df['{column}'] == {value}")
+                    
                 
         else:
             df[column] = pd.to_numeric(df[column], errors='coerce')
@@ -71,7 +77,7 @@ def select_row(df: pd.DataFrame, conditions: List[Dict]) -> pd.DataFrame:
         return df
     if len(masks) > 1:
         for mask in masks[1:]:
-            combined_mask &= mask
+            combined_mask |= mask
     
     return df[combined_mask]
 

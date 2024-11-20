@@ -1,6 +1,7 @@
 import pandas as pd
 from prompts.group_by_params_prompt import group_by_params_prompt
 from pydantic import BaseModel, field_validator, ValidationInfo
+from llm.llm import ChatGPT
 
 allowed_agg_functions = ["sum", "mean", "median", "count", "size", "max", "min", "std", "var", "first", "last"]
 
@@ -28,15 +29,16 @@ class GroupByParams(BaseModel):
         return v
 
 def group_by(df: pd.DataFrame, column, agg_function):
-    result = df.groupby(by=[column]).agg(agg_function).reset_index()
+    result = df.groupby(column).agg(agg_function).reset_index()
     return result
 
 
-def get_group_by_params(query: str, table: str, validation_context: dict, llm, column_descriptions) -> dict:
+def get_group_by_params(query: str, table: str, validation_context: dict, llm: ChatGPT, column_descriptions) -> dict:
 
     prompt = group_by_params_prompt(query, table, column_descriptions)
 
     params = llm.generate(
+        query,
         prompt,
         response_model=GroupByParams,
         system_message="You are a helpful assistant and expert in transforming tables based on python pandas operations.",

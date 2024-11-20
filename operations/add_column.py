@@ -27,7 +27,7 @@ def _get_column_value(
     """
     value = llm.generate(
         query="",
-        context=prompt,
+        prompt=prompt,
         response_model=ColumnValue,
         system_message="You are a helpful assistant.",
     )

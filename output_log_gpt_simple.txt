@@ -91,3 +91,574 @@ label: True
 
 ealuation ratio: 0.5714285714285714
 baseline ratio: 0.5714285714285714
+user query: the wildcats kept the opposing team scoreless in four games
+function chain:
+Selected rows based on the following conditions:
+opponent contains opponent, 
+table caption : 1947 kentucky wildcats football team
+col : game | date | opponent | result | wildcats points | opponents | record
+
+evaluation output:
+The statement is true because the Wildcat's record shows that they kept the opposing team scoreless in four games during the 1947 season.
+model evaluation: True
+baseline output:
+The statement claims that the Wildcats kept the opposing team scoreless in four games. However, from the table, we can check the results: 1) against Cincinnati (20-0), 2) against Georgia (26-0), 3) against Vanderbilt (14-0), and 4) against Evansville (36-0). This amounts to four games where the opposing team was indeed scoreless, making the user's statement true.
+model evaluation: False
+label: True
+
+user query: the wildcats never scored more than 7 in any game they lost
+function chain:
+Selected rows based on the following conditions:
+result contains loss, 
+table caption : 1947 kentucky wildcats football team
+col : game | date | opponent | result | wildcats points | opponents | record
+row 1 : 1 | sept 20 | ole miss | loss | 7 | 14 | 0 - 1
+row 2 : 7 | nov 1 | 18 alabama | loss | 0 | 13 | 5 - 2
+row 3 : 10 | nov 22 | tennessee | loss | 6 | 13 | 7 - 3
+evaluation output:
+The Wildcats scored 7 points in one of their losses against Ole Miss. Hence, the statement that they never scored more than 7 in any game they lost is false.
+model evaluation: False
+baseline output:
+The statement is false because the Wildcats scored 6 points in the game they lost against Tennessee, which is less than 7 points. Therefore, the claim that they never scored more than 7 in any game they lost is incorrect.
+model evaluation: False
+label: True
+
+user query: the wildcats lost one game in september and two games in november
+function chain:
+Selected rows based on the following conditions:
+date contains september, result contains loss, date contains november, result contains loss, 
+table caption : 1947 kentucky wildcats football team
+col : game | date | opponent | result | wildcats points | opponents | record
+
+evaluation output:
+The user's statement claims that the Wildcats lost one game in September and two games in November. However, after analyzing the table, it is found that the Wildcats lost multiple games in September and November, specifically more than one loss in September, thus making the statement false.
+model evaluation: False
+baseline output:
+The statement says the Wildcats lost one game in September and two games in November. According to the table, the Wildcats lost one game in September (against Ole Miss on Sept 20) and two games in November (against Alabama on Nov 1 and Tennessee on Nov 22). This part of the statement is true. However, the original question seems to indicate that the total loss count is focused only on September and November rather than overall. Therefore, it is misleading as it implies all losses are summed up when considering scores. Thus, it could be interpreted as partly true yet when focusing strictly on the months mentioned, the concept isn't absolute; hence leading to a False evaluation.
+model evaluation: False
+label: True
+
+user query: the wildcats played two games in september , four games in october , and four games in november
+function chain:
+Selected rows based on the following conditions:
+date contains september, date contains october, date contains november, 
+table caption : 1947 kentucky wildcats football team
+col : game | date | opponent | result | wildcats points | opponents | record
+
+evaluation output:
+The operations selected the rows from the table where the game dates were in September, October, and November. This allows us to count the number of games played by the Wildcats in each of these months. By examining the results, we confirmed that there were indeed two games in September, four games in October, and four games in November, matching the user's statement.
+model evaluation: True
+baseline output:
+The Wildcats played 2 games in September (on Sept 20 and Sept 27), 4 games in October (on Oct 4, Oct 11, Oct 18, and Oct 25), and 4 games in November (on Nov 1, Nov 8, Nov 15, and Nov 22). Therefore, the statement is true.
+model evaluation: True
+label: True
+
+user query: the most the wildcats outscored an opponent is by 36 points
+function chain:
+Selected rows based on the following conditions:
+result contains result, opponent contains opponent, 
+table caption : 1947 kentucky wildcats football team
+col : game | date | opponent | result | wildcats points | opponents | record
+
+evaluation output:
+To determine if the statement 'the most the Wildcats outscored an opponent is by 36 points' is true, we need to analyze the provided table. By examining the 'wildcats points' and 'opponents points' for each game, we can calculate the point differences. If no game shows a difference greater than 36 points, then the statement is false. However, if there is at least one game where the Wildcats outscored an opponent by more than 36 points, then the statement is true. Based on the context, the statement is likely false because the typical margin in college football games does not reach such extremes regularly.
+model evaluation: False
+baseline output:
+The user's statement is true because in the game against Evansville, the Wildcats scored 36 points while the opponent scored 0 points, which means they outscored Evansville by 36 points. This is the highest margin in the provided table.
+model evaluation: True
+label: True
+
+user query: the wildcats kept the opposing team scoreless in ten games
+function chain:
+Selected rows based on the following conditions:
+result contains result, result contains win, 
+table caption : 1947 kentucky wildcats football team
+col : game | date | opponent | result | wildcats points | opponents | record
+
+evaluation output:
+To evaluate the statement, we first look at the results of the 1947 Kentucky Wildcats football team's games. The condition implies we are only considering games where the Wildcats won. If we examine their results, they may have won multiple games, but keeping the opposing team scoreless in ten different games seems unlikely. A quick check of historical data indicates that they did not achieve this feat. Therefore, the statement is false.
+model evaluation: False
+baseline output:
+The Kentucky Wildcats did not keep the opposing team scoreless in ten games. Based on the provided table, they have only three instances where the opponent scored zero points: against Cincinnati, Georgia, and Vanderbilt. Therefore, the statement is false.
+model evaluation: False
+label: False
+
+user query: the wildcats never scored more than 7 points in any game they won
+function chain:
+Selected rows based on the following conditions:
+result contains win, 
+table caption : 1947 kentucky wildcats football team
+col : game | date | opponent | result | wildcats points | opponents | record
+row 1 : 2 | sept 27 | cincinnati | win | 20 | 0 | 1 - 1
+row 2 : 3 | oct 4 | xavier | win | 20 | 7 | 2 - 1
+row 3 : 4 | oct 11 | 9 georgia | win | 26 | 0 | 3 - 1 , 20
+row 4 : 5 | oct 18 | 10 vanderbilt | win | 14 | 0 | 4 - 1 , 14
+row 5 : 6 | oct 25 | michigan state | win | 7 | 6 | 5 - 1 , 13
+
+evaluation output:
+The statement claims that the Wildcats never scored more than 7 points in any game they won. However, in the provided table, the Wildcats scored 20 points in wins against Cincinnati and Xavier, 26 points against Georgia, and 14 points against Vanderbilt. Therefore, the statement is false.
+model evaluation: False
+baseline output:
+The statement claims that the Wildcats never scored more than 7 points in any game they won. However, in the table, there are several instances where the Wildcats scored more than 7 points in their wins, such as 20 points against Cincinnati, 20 points against Xavier, 26 points against Georgia, 14 points against Vanderbilt, 15 points against West Virginia, and 36 points against Evansville. Therefore, the statement is false.
+model evaluation: False
+label: False
+
+evaluation ratio: 0.5714285714285714
+baseline ratio: 0.5714285714285714
+user query: the wildcats kept the opposing team scoreless in four games
+function chain:
+Selected the following columns: ['game', 'date', 'opponent', 'result', 'wildcats points', 'opponents', 'record']
+Sorted column opponents in ascending order
+Selected rows based on the following conditions:
+result contains result, opponent contains opponent, 
+table caption : 1947 kentucky wildcats football team
+col : game | date | opponent | result | wildcats points | opponents | record
+
+evaluation output:
+To determine whether the Wildcats kept the opposing team scoreless in four games, we need to analyze the results of the games in the provided table. Based on the results, if there are not four games where the opposing team scored zero points, then the statement is false. The operations in the question suggest focusing on game results and opponents, but further details from the actual table data would clarify the exact number of scoreless games. Without that data, we cannot confirm the statement as true.
+model evaluation: False
+baseline output:
+The statement claims that the Wildcats kept the opposing team scoreless in four games. However, upon reviewing the table, the Wildcats kept their opponents scoreless in only three games: against Cincinnati, Georgia, and Vanderbilt. They did not keep any team scoreless in four games.
+model evaluation: False
+label: True
+
+user query: the wildcats never scored more than 7 in any game they lost
+function chain:
+Selected the following columns: ['game', 'date', 'opponent', 'result', 'wildcats points', 'opponents', 'record']
+Sorted column wildcats points in ascending order
+Selected rows based on the following conditions:
+result contains loss, 
+table caption : 1947 kentucky wildcats football team
+col : game | date | opponent | result | wildcats points | opponents | record
+row 1 : 7 | nov 1 | 18 alabama | loss | 0 | 13 | 5 - 2
+row 2 : 10 | nov 22 | tennessee | loss | 6 | 13 | 7 - 3
+row 3 : 1 | sept 20 | ole miss | loss | 7 | 14 | 0 - 1
+evaluation output:
+The table shows that the Wildcats scored 0 points in their loss to Alabama, 6 points in their loss to Tennessee, and 7 points in their loss to Ole Miss. None of these losses exceeded 7 points, supporting the statement that the Wildcats never scored more than 7 in any game they lost.
+model evaluation: True
+baseline output:
+The statement claims that the Wildcats never scored more than 7 points in any game they lost. However, in the game against Ole Miss, they scored 7 points, and in the game against Tennessee, they scored only 6 points. In the game against Alabama, they scored 0 points. Since they scored 7 points in a loss, the statement is false.
+model evaluation: False
+label: True
+
+user query: the wildcats lost one game in september and two games in november
+function chain:
+Selected the following columns: ['game', 'date', 'opponent', 'result', 'wildcats points', 'opponents', 'record']
+Sorted column date in ascending order
+Selected rows based on the following conditions:
+result contains loss, date contains nov, date contains sep, 
+table caption : 1947 kentucky wildcats football team
+col : game | date | opponent | result | wildcats points | opponents | record
+
+evaluation output:
+To evaluate the user's statement, we need to analyze the results of the Kentucky Wildcats football team. According to the filtered table operations, we have selected games from September that show a loss, and similarly from November. Checking these records reveals that the statement that the Wildcats lost one game in September and two games in November is not accurate based on the filtered data.
+model evaluation: False
+baseline output:
+The Wildcats lost one game in September (against Ole Miss) and two games in November (against Alabama and Tennessee).
+model evaluation: True
+label: True
+
+user query: the wildcats kept the opposing team scoreless in four games
+function chain:
+Selected the following columns: ['game', 'date', 'opponent', 'result', 'wildcats points', 'opponents', 'record']
+Sorted column opponents in ascending order
+Selected rows based on the following conditions:
+result contains result, 
+table caption : 1947 kentucky wildcats football team
+col : game | date | opponent | result | wildcats points | opponents | record
+
+evaluation output:
+After reviewing the game results, it is found that the Kentucky Wildcats did not keep the opposing team scoreless in four games during the 1947 season. The data shows that the Wildcats allowed points to their opponents in several games.
+model evaluation: False
+baseline output:
+The Wildcats did not keep the opposing team scoreless in four games. Based on the table, they only kept the opposing team scoreless in three games (Cincinnati, Georgia, and Vanderbilt). Therefore, the user's statement is false.
+model evaluation: False
+label: True
+
+user query: the wildcats never scored more than 7 in any game they lost
+function chain:
+Selected the following columns: ['game', 'date', 'opponent', 'result', 'wildcats points', 'opponents', 'record']
+Sorted column wildcats points in ascending order
+Selected rows based on the following conditions:
+result contains result, opponent contains ole miss, 
+table caption : 1947 kentucky wildcats football team
+col : game | date | opponent | result | wildcats points | opponents | record
+row 1 : 1 | sept 20 | ole miss | loss | 7 | 14 | 0 - 1
+evaluation output:
+The only game the Wildcats lost in the provided data is against Ole Miss, where they scored 7 points. Since there are no other losses listed in the data, and they did not score more than 7 in this game, the statement can be considered true.
+model evaluation: True
+baseline output:
+The statement is false because the Wildcats lost to Alabama with 0 points, and lost to Tennessee with 6 points. This shows that they have scored less than or equal to 7 points in games they lost, but the statement claims they never scored more than 7, which is not accurate since in one loss they scored 7 points.
+model evaluation: False
+label: True
+
+user query: the wildcats lost one game in september and two games in november
+function chain:
+Selected the following columns: ['date', 'result', 'wildcats points', 'opponents', 'record']
+Sorted column date in ascending order
+Selected rows based on the following conditions:
+date contains nov, result contains loss, date contains sep, result contains loss, 
+table caption : 1947 kentucky wildcats football team
+col : date | result | wildcats points | opponents | record
+row 1 : nov 1 | loss | 0 | 13 | 5 - 2
+row 2 : nov 15 | win | 36 | 0 | 7 - 2
+row 3 : nov 22 | loss | 6 | 13 | 7 - 3
+row 4 : nov 8 | win | 15 | 6 | 6 - 2
+row 5 : sept 20 | loss | 7 | 14 | 0 - 1
+
+evaluation output:
+The Wildcats lost one game in September (on Sept 20) and two games in November (on Nov 1 and Nov 22). Therefore, the statement is not true as it suggests a false condition about the number of games lost in November.
+model evaluation: False
+baseline output:
+The Wildcats lost one game in September (against Ole Miss) and two games in November (against Alabama and Tennessee). Therefore, the statement is not true since it claims the Wildcats only lost two games in total instead of stating the specific months.
+model evaluation: False
+label: True
+
+user query: the wildcats played two games in september , four games in october , and four games in november
+function chain:
+Selected the following columns: ['game', 'date', 'opponent', 'result', 'wildcats points', 'opponents', 'record']
+Grouped dataframe by column date and aggregated it based on count
+Selected rows based on the following conditions:
+date contains september, date contains october, date contains november, 
+table caption : 1947 kentucky wildcats football team
+col : date | game | opponent | result | wildcats points | opponents | record
+
+evaluation output:
+The user's statement claims that the Wildcats played two games in September, four games in October, and four games in November. However, based on the operations, we grouped the data by date and counted the games played in each specified month. The data must be examined to verify the actual counts. If the counts do not match the user's claim, then the statement is false.
+model evaluation: False
+baseline output:
+The statement is true because the table shows that the Wildcats played 2 games in September (Sept 20 and Sept 27), 4 games in October (Oct 4, Oct 11, Oct 18, Oct 25), and 4 games in November (Nov 1, Nov 8, Nov 15, Nov 22). Hence, the numbers match the statement.
+model evaluation: True
+label: True
+
+user query: the most the wildcats outscored an opponent is by 36 points
+function chain:
+Selected the following columns: ['game', 'date', 'opponent', 'result', 'wildcats points', 'opponents', 'record']
+Sorted column wildcats points in ascending order
+Selected rows based on the following conditions:
+result contains result, opponent contains opponent, 
+table caption : 1947 kentucky wildcats football team
+col : game | date | opponent | result | wildcats points | opponents | record
+
+evaluation output:
+To determine the maximum point difference the 1947 Kentucky Wildcats football team achieved against an opponent, we examined the results and calculated the score differences. If we find that the highest score difference is less than 36 points, the statement is false. After checking the sorted points and results, it shows that the largest margin of victory was actually less than 36 points.
+model evaluation: False
+baseline output:
+The statement claims that the Wildcats outscored an opponent by 36 points, which would indicate a 36-point margin of victory. Looking at the table, the most the Wildcats scored was 36 points against Evansville, but the opponent scored 0 points. This means the Wildcats outscored Evansville by 36 points, making the user's claim true.
+model evaluation: False
+label: True
+
+user query: the wildcats kept the opposing team scoreless in four games
+function chain:
+Selected the following columns: ['game', 'date', 'opponent', 'result', 'wildcats points', 'opponents', 'record']
+Sorted column opponents in ascending order
+Grouped dataframe by column result and aggregated it based on count
+
+table caption : 1947 kentucky wildcats football team
+col : result | game | date | opponent | wildcats points | opponents | record
+row 1 : loss | 3 | 3 | 3 | 3 | 3 | 3
+row 2 : win | 7 | 7 | 7 | 7 | 7 | 7
+evaluation output:
+The given statement claims that the Wildcats kept the opposing team scoreless in four games. However, examining the table, we can see that there are only two games listed. In the first game, the Wildcats lost and allowed points to the opposing team (3 points), and in the second game, they won while scoring 7 points but, again, the opposing team scored (7 points). Since there are no games where the opposing team was scoreless, the statement is false.
+model evaluation: False
+baseline output:
+The statement claims that the Wildcats kept the opposing team scoreless in four games. According to the table, the Wildcats kept the opposing team scoreless in only three games: against Cincinnati, Georgia, and Vanderbilt. Therefore, the statement is false.
+model evaluation: False
+label: True
+
+user query: the wildcats never scored more than 7 in any game they lost
+function chain:
+Sorted column wildcats points in ascending order
+Selected the following columns: ['result', 'wildcats points']
+Grouped dataframe by column result and aggregated it based on max
+
+table caption : 1947 kentucky wildcats football team
+col : result | wildcats points
+row 1 : loss | 7
+row 2 : win | 36
+evaluation output:
+In the provided table for the 1947 Kentucky Wildcats football team, the only loss recorded shows that the Wildcats scored 7 points. Since this is the only instance of a loss, it can be concluded that they never scored more than 7 points in any game they lost.
+model evaluation: True
+baseline output:
+The statement is false because in the game against Alabama on November 1, the Wildcats scored 0 points, and in the game against Tennessee on November 22, they scored 6 points. Both of these games were losses, and each score is less than or equal to 7, which does not support the statement that they never scored more than 7 in any game they lost.
+model evaluation: False
+label: True
+
+user query: the wildcats lost one game in september and two games in november
+function chain:
+Selected the following columns: ['game', 'date', 'opponent', 'result', 'wildcats points', 'opponents', 'record']
+Sorted column date in ascending order
+Grouped dataframe by column date and aggregated it based on count
+
+table caption : 1947 kentucky wildcats football team
+col : date | game | opponent | result | wildcats points | opponents | record
+row 1 : nov 1 | 1 | 1 | 1 | 1 | 1 | 1
+row 2 : nov 15 | 1 | 1 | 1 | 1 | 1 | 1
+row 3 : nov 22 | 1 | 1 | 1 | 1 | 1 | 1
+row 4 : nov 8 | 1 | 1 | 1 | 1 | 1 | 1
+row 5 : oct 11 | 1 | 1 | 1 | 1 | 1 | 1
+
+evaluation output:
+The statement claims that the Wildcats lost one game in September and two games in November. However, the provided data from the table does not accurately depict any losses, as all recorded results are unclear, which leads us to the conclusion that the losses do not match. Therefore, the statement is false.
+model evaluation: False
+baseline output:
+The statement is true because the Wildcats lost one game in September (against Ole Miss on Sept 20) and two games in November (against Alabama on Nov 1 and Tennessee on Nov 22).
+model evaluation: True
+label: True
+
+user query: the wildcats played two games in september , four games in october , and four games in november
+function chain:
+Selected the following columns: ['game', 'date', 'opponent', 'result', 'wildcats points', 'opponents', 'record']
+Sorted column date in ascending order
+Selected rows based on the following conditions:
+date contains september, date contains october, date contains november, 
+table caption : 1947 kentucky wildcats football team
+col : game | date | opponent | result | wildcats points | opponents | record
+
+evaluation output:
+The operations indicate that the Wildcats played two games in September, four games in October, and four games in November as it selects the relevant games per month based on the specified conditions.
+model evaluation: True
+baseline output:
+The statement claims that the Wildcats played two games in September, four games in October, and four games in November. According to the table: 
+- In September, the Wildcats played 2 games (against Ole Miss and Cincinnati).
+- In October, they played 4 games (against Xavier, Georgia, Vanderbilt, and Michigan State).
+- In November, they also played 4 games (against Alabama, West Virginia, Evansville, and Tennessee).
+Thus, the user's statement is true.
+model evaluation: True
+label: True
+
+user query: the most the wildcats outscored an opponent is by 36 points
+function chain:
+Selected the following columns: ['wildcats points', 'opponents']
+Sorted column wildcats points in descending order
+Grouped dataframe by column opponents and aggregated it based on max
+
+table caption : 1947 kentucky wildcats football team
+col : opponents | wildcats points
+row 1 : 0 | 36
+row 2 : 6 | 15
+row 3 : 7 | 20
+row 4 : 13 | 6
+row 5 : 14 | 7
+evaluation output:
+The table shows that the Kentucky Wildcats scored 36 points against an opponent, which is their highest score listed. There are no entries where they outscored an opponent by more than 36 points, making the statement true.
+model evaluation: True
+baseline output:
+The Wildcats outscored Evansville by 36 points on November 15, winning 36-0. This is the largest margin of victory recorded in the table.
+model evaluation: True
+label: True
+
+user query: the wildcats kept the opposing team scoreless in ten games
+function chain:
+Selected the following columns: ['game', 'date', 'opponent', 'result', 'wildcats points', 'opponents', 'record']
+Sorted column opponents in ascending order
+Selected rows based on the following conditions:
+result contains win, 
+table caption : 1947 kentucky wildcats football team
+col : game | date | opponent | result | wildcats points | opponents | record
+row 1 : 2 | sept 27 | cincinnati | win | 20 | 0 | 1 - 1
+row 2 : 4 | oct 11 | 9 georgia | win | 26 | 0 | 3 - 1 , 20
+row 3 : 5 | oct 18 | 10 vanderbilt | win | 14 | 0 | 4 - 1 , 14
+row 4 : 9 | nov 15 | evansville | win | 36 | 0 | 7 - 2
+row 5 : 6 | oct 25 | michigan state | win | 7 | 6 | 5 - 1 , 13
+
+evaluation output:
+The Kentucky Wildcats football team did not keep the opposing team scoreless in ten games; they achieved that only in four games according to the records displayed in the table.
+model evaluation: False
+baseline output:
+The Wildcats did not keep the opposing team scoreless in ten games. According to the table, they achieved this feat in only four games: against Cincinnati, Georgia, Vanderbilt, and Evansville.
+model evaluation: False
+label: False
+
+user query: the wildcats never scored more than 7 points in any game they won
+function chain:
+Selected the following columns: ['game', 'date', 'opponent', 'result', 'wildcats points']
+Sorted column wildcats points in ascending order
+Grouped dataframe by column result and aggregated it based on max
+
+table caption : 1947 kentucky wildcats football team
+col : result | game | date | opponent | wildcats points
+row 1 : loss | 10 | sept 20 | tennessee | 7
+row 2 : win | 9 | sept 27 | xavier | 36
+evaluation output:
+The statement claims that the Wildcats never scored more than 7 points in any game they won. However, according to the table, in the game they won against Xavier, they scored 36 points. This directly contradicts the statement, making it false.
+model evaluation: False
+baseline output:
+The statement is false because in several of the games that the Wildcats won, they scored more than 7 points. Specifically, they scored 20 points against Cincinnati, 20 points against Xavier, 26 points against Georgia, 14 points against Vanderbilt, 15 points against West Virginia, and 36 points against Evansville. Only the game against Michigan State did they score exactly 7 points in a win.
+model evaluation: False
+label: False
+
+evaluation ratio: 0.7142857142857143
+baseline ratio: 0.7142857142857143
+user query: the wildcats kept the opposing team scoreless in four games
+function chain:
+Selected rows based on the following conditions:
+opponents == 0, 
+table caption : 1947 kentucky wildcats football team
+col : game | date | opponent | result | wildcats points | opponents | record
+row 1 : 2 | sept 27 | cincinnati | win | 20 | 0 | 1 - 1
+row 2 : 4 | oct 11 | 9 georgia | win | 26 | 0 | 3 - 1 , 20
+row 3 : 5 | oct 18 | 10 vanderbilt | win | 14 | 0 | 4 - 1 , 14
+row 4 : 9 | nov 15 | evansville | win | 36 | 0 | 7 - 2
+evaluation output:
+The Wildcats kept the opposing team scoreless in four games: against Cincinnati (20-0), Georgia (26-0), Vanderbilt (14-0), and Evansville (36-0). Each of these games resulted in a 'win' with the opponents scoring 0 points.
+model evaluation: True
+baseline output:
+The Kentucky Wildcats did not keep the opposing team scoreless in four games. They managed to keep the opponents scoreless in three games (Cincinnati, Georgia, and Vanderbilt) but allowed points in other games.
+model evaluation: False
+label: True
+
+user query: the wildcats never scored more than 7 in any game they lost
+function chain:
+Selected rows based on the following conditions:
+wildcats points < 7, result contains loss, 
+table caption : 1947 kentucky wildcats football team
+col : game | date | opponent | result | wildcats points | opponents | record
+row 1 : 1 | sept 20 | ole miss | loss | 7 | 14 | 0 - 1
+row 2 : 7 | nov 1 | 18 alabama | loss | 0 | 13 | 5 - 2
+row 3 : 10 | nov 22 | tennessee | loss | 6 | 13 | 7 - 3
+evaluation output:
+The statement claims that the Wildcats never scored more than 7 in any game they lost. However, according to the table, they lost a game against Ole Miss where they scored 7 points. Thus, they did score 7 points in a game they lost, contradicting the statement.
+model evaluation: False
+baseline output:
+The user's statement is false because the Wildcats scored 6 points in their loss to Tennessee, which is less than 7. Thus, they did score fewer than 7 points in a game they lost.
+model evaluation: False
+label: True
+
+user query: the wildcats lost one game in september and two games in november
+function chain:
+Selected rows based on the following conditions:
+date contains september, result contains loss, record == 1, date contains november, record == 2, 
+table caption : 1947 kentucky wildcats football team
+col : game | date | opponent | result | wildcats points | opponents | record
+row 1 : 1 | sept 20 | ole miss | loss | 7 | 14 | nan
+row 2 : 7 | nov 1 | 18 alabama | loss | 0 | 13 | nan
+row 3 : 10 | nov 22 | tennessee | loss | 6 | 13 | nan
+evaluation output:
+The user statement claims that the Wildcats lost one game in September and two games in November. However, according to the table, they lost one game in September (Ole Miss) and two games in November (Alabama and Tennessee), which confirms the user's statement is true. The operations selected the correct rows based on the conditions, confirming the user's claim.
+model evaluation: False
+baseline output:
+The user statement claims that the Wildcats lost one game in September and two games in November. According to the table, the Wildcats lost one game in September (against Ole Miss on Sept 20) and two games in November (against Alabama on Nov 1 and Tennessee on Nov 22). Therefore, the statement is true.
+model evaluation: False
+label: True
+
+user query: the wildcats played two games in september , four games in october , and four games in november
+function chain:
+Selected rows based on the following conditions:
+date contains september, date contains october, date contains november, 
+table caption : 1947 kentucky wildcats football team
+col : game | date | opponent | result | wildcats points | opponents | record
+
+evaluation output:
+To evaluate the statement 'the wildcats played two games in September, four games in October, and four games in November', we need to examine the number of games played in each of these months based on the provided table. After analyzing available records of game dates, it can be determined that the actual numbers of games played in those months does not match the claims in the statement.
+model evaluation: False
+baseline output:
+The statement claims the Wildcats played two games in September, four in October, and four in November. According to the table: In September, they played 2 games (Sept 20 and Sept 27). In October, they played 3 games (Oct 4, Oct 11, Oct 18, Oct 25). In November, they played 4 games (Nov 1, Nov 8, Nov 15, Nov 22). Thus, the statement is false because the number of games played in October should be three, not four.
+model evaluation: False
+label: True
+
+user query: the most the wildcats outscored an opponent is by 36 points
+function chain:
+Selected rows based on the following conditions:
+wildcats points > 36, opponents <= 0, 
+table caption : 1947 kentucky wildcats football team
+col : game | date | opponent | result | wildcats points | opponents | record
+row 1 : 2 | sept 27 | cincinnati | win | 20 | 0 | 1 - 1
+row 2 : 4 | oct 11 | 9 georgia | win | 26 | 0 | 3 - 1 , 20
+row 3 : 5 | oct 18 | 10 vanderbilt | win | 14 | 0 | 4 - 1 , 14
+row 4 : 9 | nov 15 | evansville | win | 36 | 0 | 7 - 2
+evaluation output:
+The maximum points the Wildcats scored in a game was 36 points against Evansville, and there is no game where they outscored an opponent by 36 points. The only mentioned scoring margin is 36-0. Therefore, the statement that the most the Wildcats outscored an opponent is by 36 points is false.
+model evaluation: False
+baseline output:
+The Kentucky Wildcats outscored their opponent by 36 points in the game against Evansville (36 to 0), not by 36 points total. In that game, the Wildcats scored 36 points while their opponent scored 0, which is an outscoring margin of 36 points. Hence, the statement that they outscored an opponent by 36 points is true.
+model evaluation: False
+label: True
+
+user query: the wildcats kept the opposing team scoreless in ten games
+function chain:
+Selected rows based on the following conditions:
+opponents == 0, 
+table caption : 1947 kentucky wildcats football team
+col : game | date | opponent | result | wildcats points | opponents | record
+row 1 : 2 | sept 27 | cincinnati | win | 20 | 0 | 1 - 1
+row 2 : 4 | oct 11 | 9 georgia | win | 26 | 0 | 3 - 1 , 20
+row 3 : 5 | oct 18 | 10 vanderbilt | win | 14 | 0 | 4 - 1 , 14
+row 4 : 9 | nov 15 | evansville | win | 36 | 0 | 7 - 2
+evaluation output:
+The statement claims that the Wildcats kept the opposing team scoreless in ten games. However, the provided table only shows four games where the opposing team (0 points) was scoreless. Therefore, the statement is false.
+model evaluation: False
+baseline output:
+The statement that the Wildcats kept the opposing team scoreless in ten games is false. According to the table, the Wildcats only kept the opposing team scoreless in 4 games (Cincinnati, Georgia, Vanderbilt, and Evansville).
+model evaluation: False
+label: False
+
+user query: the wildcats never scored more than 7 points in any game they won
+function chain:
+Selected rows based on the following conditions:
+wildcats points < 7, result contains win, 
+table caption : 1947 kentucky wildcats football team
+col : game | date | opponent | result | wildcats points | opponents | record
+row 1 : 2 | sept 27 | cincinnati | win | 20 | 0 | 1 - 1
+row 2 : 3 | oct 4 | xavier | win | 20 | 7 | 2 - 1
+row 3 : 4 | oct 11 | 9 georgia | win | 26 | 0 | 3 - 1 , 20
+row 4 : 5 | oct 18 | 10 vanderbilt | win | 14 | 0 | 4 - 1 , 14
+row 5 : 6 | oct 25 | michigan state | win | 7 | 6 | 5 - 1 , 13
+
+evaluation output:
+The statement is false because the Wildcats scored 20, 20, 26, and 14 points in games they won. Only one game, where they scored 7 points, is on the list of wins, which contradicts the statement that they never scored more than 7 points in any game they won.
+model evaluation: False
+baseline output:
+The statement is false because the Wildcats scored more than 7 points in several games they won: specifically, they scored 20 points against Cincinnati, 20 points against Xavier, 26 points against Georgia, 14 points against Vanderbilt, 15 points against West Virginia, and 36 points against Evansville.
+model evaluation: False
+label: False
+
+user query: the wildcats loss one game in november and two games in september
+function chain:
+Selected rows based on the following conditions:
+result contains loss, date contains september, 
+table caption : 1947 kentucky wildcats football team
+col : game | date | opponent | result | wildcats points | opponents | record
+row 1 : 1 | sept 20 | ole miss | loss | 7 | 14 | 0 - 1
+row 2 : 7 | nov 1 | 18 alabama | loss | 0 | 13 | 5 - 2
+row 3 : 10 | nov 22 | tennessee | loss | 6 | 13 | 7 - 3
+evaluation output:
+The statement "the wildcats loss one game in november and two games in september" is false because, according to the table, the Wildcats lost two games in September (Ole Miss) and three games in November (Alabama and Tennessee). Therefore, the user's statement does not accurately reflect the records.
+model evaluation: False
+baseline output:
+The statement claims that the Wildcats lost one game in November and two games in September. According to the table: In September, they lost one game (to Ole Miss) and won one (against Cincinnati), making it only one loss in September, not two. In November, they lost two games (to Alabama and Tennessee), which contradicts the claim of losing only one game in November. Therefore, the statement is false.
+model evaluation: False
+label: False
+
+user query: the wildcats played four games in september , two games in october , and two games in november
+function chain:
+Selected rows based on the following conditions:
+date contains september, date contains october, 
+table caption : 1947 kentucky wildcats football team
+col : game | date | opponent | result | wildcats points | opponents | record
+
+evaluation output:
+The statement claims that the Wildcats played four games in September, two in October, and two in November. However, when reviewing the table, we note the actual counts of games played during those months. The breakdown reveals that they did not meet these counts; specifically, there were not four games in September as claimed.
+model evaluation: False
+baseline output:
+The statement is true because the table shows that the Wildcats played 4 games in September (on Sept 20 and Sept 27), 3 games in October (on Oct 4, Oct 11, and Oct 18), and 3 games in November (on Nov 1, Nov 8, and Nov 15). Therefore, the correct count of games is: 2 only in October, when only two games were played, but the statement suggests that the count of total games hasn't considered October games as separate, this results to be false.
+model evaluation: True
+label: False
+
+user query: the most the wildcats outscored an opponent is by 26 points
+function chain:
+Selected rows based on the following conditions:
+wildcats points > 26, 
+table caption : 1947 kentucky wildcats football team
+col : game | date | opponent | result | wildcats points | opponents | record
+row 1 : 9 | nov 15 | evansville | win | 36 | 0 | 7 - 2
+evaluation output:
+The only game listed shows that the Wildcats scored 36 points and their opponent scored 0 points, which means they outscored their opponent by 36 points. Therefore, it is true that the most the Wildcats outscored an opponent is by 26 points as 36 is greater than 26.
+model evaluation: True
+baseline output:
+To evaluate the statement 'the most the wildcats outscored an opponent is by 26 points', we examine the results in the table. The Wildcats' largest victory margin can be calculated by looking at the points scored versus the points allowed in each game. They outscored their opponent by the following margins: against Cincinnati, they won by 20 points (20 - 0); against Xavier, they won by 13 points (20 - 7); against Georgia, they won by 26 points (26 - 0); against Vanderbilt, they won by 14 points (14 - 0); against Michigan State, they won by 1 point (7 - 6); against Alabama, they lost by 13 points (0 - 13); against West Virginia, they won by 9 points (15 - 6); against Evansville, they won by 36 points (36 - 0); against Tennessee, they lost by 7 points (6 - 13). The largest outscoring by the Wildcats was not 26 points but rather 36 points against Evansville. Therefore, the statement is false.
+model evaluation: False
+label: False
+
+evaluation ratio: 0.5
+baseline ratio: 0.4

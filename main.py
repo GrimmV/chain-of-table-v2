@@ -22,8 +22,8 @@ MODEL_NAME_NEMO = os.getenv("MODEL_NAME_NEMO")
 MODEL_NAME_GPT = os.getenv("MODEL_NAME_GPT")
 BASE_URL = os.getenv("BASE_URL")
 
-model = "nemo"
-dataset = load_dataset("data/data.jsonl")
+model = "gpt"
+dataset = load_dataset("data/tabfact.jsonl")
 if model == "nemo":
     llm = OllamaOpenAI(model_name=MODEL_NAME_NEMO, base_url=BASE_URL)
 else:
@@ -55,7 +55,7 @@ def get_final_table(query, table: pd.DataFrame, llm, caption: str, column_descri
         
 
 if __name__ == "__main__":
-    num_samples = 7
+    num_samples = 10
     eval_values = []
     eval_values_baseline = []
     for idx in range(num_samples):
@@ -118,5 +118,5 @@ if __name__ == "__main__":
     
         # log results
     with open(output_file, 'a') as file:
-        file.write(f"ealuation ratio: {ratio_eval}\n")
+        file.write(f"evaluation ratio: {ratio_eval}\n")
         file.write(f"baseline ratio: {ratio_baseline}\n")
