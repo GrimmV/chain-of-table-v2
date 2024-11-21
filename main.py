@@ -22,8 +22,10 @@ MODEL_NAME_NEMO = os.getenv("MODEL_NAME_NEMO")
 MODEL_NAME_GPT = os.getenv("MODEL_NAME_GPT")
 BASE_URL = os.getenv("BASE_URL")
 
+dataset_name = "data"
+
 model = "gpt"
-dataset = load_dataset("data/tabfact.jsonl")
+dataset = load_dataset(f"data/{dataset_name}.jsonl")
 if model == "nemo":
     llm = OllamaOpenAI(model_name=MODEL_NAME_NEMO, base_url=BASE_URL)
 else:
@@ -81,7 +83,7 @@ if __name__ == "__main__":
         final_response = final_evaluation(statement, op_chain_nl, final_pipe_table, llm)
         final_response_baseline = final_evaluation_baseline(statement, pipe_table, llm)
         # Specify the file path where you want to save the output
-        output_file = f"output_log_{model}_simple.txt"
+        output_file = f"output_log_{model}_{dataset_name}_simple.txt"
 
         # log results
         with open(output_file, 'a') as file:

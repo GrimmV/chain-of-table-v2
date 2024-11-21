@@ -23,9 +23,9 @@ Die LLMs wurden mit <a href="https://python.useinstructor.com/">Instructor</a> m
 
 Obwohl CoT funktioniert, kommt es häufig vor, dass das Modell zwar richtig argumentiert, aber dann eine falsche Antwort gibt.
 
-## Beispiel 1
+## Beispiel: Richtige Argumentation, falscher Output
 
-user query: the wildcats lost one game in september and two games in november
+<i>user query: the wildcats lost one game in september and two games in november
 
 function chain:
 Selected rows based on the following conditions:
@@ -39,39 +39,49 @@ row 2 : 7 | nov 1 | 18 alabama | loss | 0 | 13 | nan
 row 3 : 10 | nov 22 | tennessee | loss | 6 | 13 | nan
 
 evaluation output:
-The user statement claims that the Wildcats lost one game in September and two games in November. However, according to the table, they lost one game in September (Ole Miss) and two games in November (Alabama and Tennessee), which confirms the user's statement is true. The operations selected the correct rows based on the conditions, confirming the user's claim.
+The user statement claims that the Wildcats lost one game in September and two games in November. However, according to the table, they lost one game in September (Ole Miss) and two games in November (Alabama and Tennessee), <b>which confirms the user's statement is true</b>. The operations selected the correct rows based on the conditions, confirming the user's claim.
 
-model evaluation: False
+<b>model evaluation: False</b></i>
 
-baseline output:
-The user statement claims that the Wildcats lost one game in September and two games in November. According to the table, the Wildcats lost one game in September (against Ole Miss on Sept 20) and two games in November (against Alabama on Nov 1 and Tennessee on Nov 22). Therefore, the statement is true.
+## Beispiel: Bei Datumsangaben, wird nicht die Grammatik in der Tabelle berücksichtigt
 
-model evaluation: False
+Es kommt vor, dass das LLM nach "november" filtern will, obwohl die Datums-Spalte so formatiert ist: "nov 24"
 
-label: True
-
-## Beispiel 2
-
-user query: the most the wildcats outscored an opponent is by 26 points
+<i>user query: the wildcats loss one game in november and two games in september
 
 function chain:
 Selected rows based on the following conditions:
-wildcats points > 26, 
+result contains loss, date <b>contains november</b>, result contains loss, date <b>contains september</b>, 
+
+table caption : 1947 kentucky wildcats football team
+col : game | date | opponent | result | wildcats points | opponents | record
+row 1 : 1 | <b>sept 20</b> | ole miss | loss | 7 | 14 | 0 - 1
+row 2 : 7 | nov 1 | 18 alabama | loss | 0 | 13 | 5 - 2
+row 3 : 10 | nov 22 | tennessee | loss | 6 | 13 | 7 - 3
+
+evaluation output:
+The wildcats lost only one game in November (on Nov 1 vs Alabama) and zero games in September.
+model evaluation: False</i>
+
+## Beispiel: ID-Spalten werden grundlos zum Filtern genutzt
+
+<i>user query: the wildcats played four games in september , two games in october , and two games in november
+
+function chain:
+Selected rows based on the following conditions:
+
+<b>game >= 3</b>, 
 
 table caption : 1947 kentucky wildcats football team
 
-
 col : game | date | opponent | result | wildcats points | opponents | record
-row 1 : 9 | nov 15 | evansville | win | 36 | 0 | 7 - 2
+row 1 : 3 | oct 4 | xavier | win | 20 | 7 | 2 - 1
+row 2 : 4 | oct 11 | 9 georgia | win | 26 | 0 | 3 - 1 , 20
+row 3 : 5 | oct 18 | 10 vanderbilt | win | 14 | 0 | 4 - 1 , 14
+row 4 : 6 | oct 25 | michigan state | win | 7 | 6 | 5 - 1 , 13
+row 5 : 7 | nov 1 | 18 alabama | loss | 0 | 13 | 5 - 2
 
 evaluation output:
-The only game listed shows that the Wildcats scored 36 points and their opponent scored 0 points, which means they outscored their opponent by 36 points. Therefore, it is true that the most the Wildcats outscored an opponent is by 26 points as 36 is greater than 26.
+According to the given table, the Wildcats played only one game in September, two games in October, and one game in November.
 
-model evaluation: True
-
-baseline output:
-To evaluate the statement 'the most the wildcats outscored an opponent is by 26 points', we examine the results in the table. The Wildcats' largest victory margin can be calculated by looking at the points scored versus the points allowed in each game. They outscored their opponent by the following margins: against Cincinnati, they won by 20 points (20 - 0); against Xavier, they won by 13 points (20 - 7); against Georgia, they won by 26 points (26 - 0); against Vanderbilt, they won by 14 points (14 - 0); against Michigan State, they won by 1 point (7 - 6); against Alabama, they lost by 13 points (0 - 13); against West Virginia, they won by 9 points (15 - 6); against Evansville, they won by 36 points (36 - 0); against Tennessee, they lost by 7 points (6 - 13). The largest outscoring by the Wildcats was not 26 points but rather 36 points against Evansville. Therefore, the statement is false.
-
-model evaluation: False
-
-label: False
+model evaluation: False</i>
